@@ -1,0 +1,116 @@
+/* green OneDee*/
+#greenScheme {
+    color: #02644b;
+    color: #04100e;
+    color: #01e083;
+    color: #031b1b;
+    color: #052321;
+    color: #6f7f7c;
+    color: #2ea98d;
+    color: #17876e;
+    color: #075643;
+    color: #0a463a;
+    color: #07322b;
+    color: #f1f7f7;
+    color: #01e083;
+    color: #a8ccb7;
+    color: #2cc197;
+    color: #02644b;
+}
+
+/* violet OneDee*/
+#violetScheme {
+    color: #7b3dd8;
+    color: #c49eff;
+    color: #a463f2;
+    color: #f4f3fb;
+    color: #2d2c38;
+    color: #d2d1de;
+    color: #252c2e;
+    color: #1e2527;
+    color: #5f2cdb;
+    color: #c5b3ef;
+    color: #6120e9;
+    color: #f4f3f8;
+}
+
+/* 🌿 Fresh & Minimal */
+:root {
+    --color-bg-light: #f9fafb;
+    --color-primary-accent: #10b981;
+    --color-secondary-accent: #3b82f6;
+    --color-neutral-dark-text: #111827;
+    --color-soft-gray: #e5e7eb;
+}
+
+/* 🌅 Warm & Vibrant */
+:root {
+    --color-bg-light-warm: #fff7ed;
+    --color-primary-accent-warm: #f97316;
+    --color-secondary-accent-warm: #ef4444;
+    --color-neutral-dark-text-warm: #1f2937;
+    --color-warm-highlight: #facc15;
+}
+
+/* 🪐 Sleek & Modern Dark */
+:root {
+    --color-bg-dark: #0f172a;
+    --color-primary-accent-dark: #6366f1;
+    --color-secondary-accent-dark: #14b8a6;
+    --color-neutral-light-text: #f1f5f9;
+    --color-muted-gray: #475569;
+}
+
+/* 💜 Elegant Violet Palette */
+:root {
+    --color-bg-light-violet: #f5f3ff; /* Light violet background */
+    --color-primary-accent-violet: #8b5cf6; /* Vivid violet */
+    --color-secondary-accent-violet: #a78bfa; /* Soft lavender */
+    --color-neutral-dark-text-violet: #1e1b4b; /* Deep indigo text */
+    --color-muted-gray-violet: #ede9fe; /* Muted lavender-gray */
+}
+
+/* 💙 Cool & Clean Blue Palette */
+:root {
+    --color-bg-light-blue: #eff6ff; /* Light blue background */
+    --color-primary-accent-blue: #3b82f6; /* Vivid blue */
+    --color-secondary-accent-blue: #60a5fa; /* Softer sky blue */
+    --color-neutral-dark-text-blue: #1e3a8a; /* Deep navy text */
+    --color-muted-gray-blue: #dbeafe; /* Muted icy blue-gray */
+}
+
+/* 🌱 Fresh & Natural Green Palette */
+:root {
+    --color-bg-light-green: #f0fdf4; /* Light minty background */
+    --color-primary-accent-green: #22c55e; /* Vibrant green */
+    --color-secondary-accent-green: #4ade80; /* Softer lime green */
+    --color-neutral-dark-text-green: #14532d; /* Deep forest text */
+    --color-muted-gray-green: #dcfce7; /* Muted pale green-gray */
+}
+
+/* 🔥 Bold & Warm Red Palette */
+:root {
+    --color-bg-light-red: #fef2f2; /* Soft pinkish background */
+    --color-primary-accent-red: #ef4444; /* Vivid red */
+    --color-secondary-accent-red: #f87171; /* Light coral red */
+    --color-neutral-dark-text-red: #7f1d1d; /* Deep maroon text */
+    --color-muted-gray-red: #fee2e2; /* Muted pinkish-gray */
+}
+
+/* 🖤 Sleek Black & Grayscale Palette */
+:root {
+    --color-bg-black: #121212; /* Very dark background */
+    --color-primary-accent-black: #bb86fc; /* Soft purple accent */
+    --color-secondary-accent-black: #03dac6; /* Teal accent */
+    --color-neutral-light-text: #e0e0e0; /* Light gray text */
+    --color-muted-gray-black: #2c2c2c; /* Dark gray elements */
+}
+
+/* 🌟 Sunny Yellow Palette */
+:root {
+    --color-bg-light-yellow: #fffbeb; /* Soft pale yellow background */
+    --color-primary-accent-yellow: #fbbf24; /* Warm golden yellow */
+    --color-secondary-accent-yellow: #f59e0b; /* Deep amber yellow */
+    --color-neutral-dark-text-yellow: #92400e; /* Dark brownish text */
+    --color-muted-gray-yellow: #fef3c7; /* Light creamy yellow */
+}

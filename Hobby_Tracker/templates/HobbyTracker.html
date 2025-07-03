@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link
+            rel="stylesheet"
+            href="{{ url_for('static', filename='Hobby_Tracker.css') }}"
+        />
+        <title>Hobby Tracker</title>
+    </head>
+    <body>
+        <!-- The header -->
+        <div id="headerContainer">
+            <div id="header">
+                <h1 id="title">Habit Tracker</h1>
+                <p id="streakText">Total Streak: 7 Days</p>
+                <button id="addNewHabit">Add New Habit</button>
+            </div>
+        </div>
+
+        <!-- The Habit Container -->
+        <div id="containerBackground">
+            <div id="container">
+                <h2 id="habitList">Habit List</h2>
+
+                <!-- the form for submitting data -->
+                <div id="addHabitData">
+                    <div id="exitButton">X</div>
+                    <form action="" id="formSubmitData">
+                        <label for="habitData" id="addHabitLabel"
+                            >Add the Habit:
+                        </label>
+                        <textarea id="habitData"></textarea>
+                        <button id="submitData">Submit</button>
+                    </form>
+                </div>
+
+                <!-- the form for updateing data -->
+                <div id="updateHabitData">
+                    <div id="exitButtonForUpdate">X</div>
+                    <form action="" id="updateSubmitData">
+                        <label for="updateHabitTxtarea" id="updateHabitLabel"
+                            >Update the Habit:
+                        </label>
+                        <textarea id="updateHabitTxtarea"></textarea>
+                        <button id="updateSubmit">Update</button>
+                    </form>
+                </div>
+
+                <!-- Delete Confirmation -->
+                <div id="deleteHabitData">
+                    <button id="confirmDelete">Confirm</button>
+                    <button id="cancelDelete">Cancel</button>
+                </div>
+
+                <div id="containerForHabbit"></div>
+
+                <!-- Place to put the for loop in jinja -->
+                <!-- Its the individual Habit items -->
+                <!-- Divided through habits class -->
+
+                <!-- for keeping as a model -->
+                <!-- <div class="habits">
+                    <h3 class="theHabit">Code</h3>
+                    <p class="habitStreak">Streak: 5 days</p>
+                    <table class="tableContainer">
+                        <tr>
+                            <th>Calendar:</th>
+                            <th>S</th>
+                            <th>M</th>
+                            <th>T</th>
+                            <th>W</th>
+                            <th>T</th>
+                            <th>F</th>
+                            <th>S</th>
+                        </tr>
+                        <tr class="rowButton">
+                            <td>
+                                <button class="updateBtn">Update</button
+                                ><button class="deleteBtn">Delete</button>
+                            </td>
+                            <td><button>X</button></td>
+                            <td><button>X</button></td>
+                            <td><button>X</button></td>
+                            <td><button>X</button></td>
+                            <td><button>X</button></td>
+                            <td><button>X</button></td>
+                            <td><button>X</button></td>
+                        </tr>
+                    </table>
+                </div> -->
+            </div>
+        </div>
+        <script>
+            const apiURL = "{{ url_for('getData') }}";
+            const sendURL = "{{ url_for('receiveData') }}";
+            const updateURL =
+                "{{ url_for('updateHabit', id=0).replace('0','') }}";
+            const deleteURL =
+                "{{ url_for('deleteHabit', id=0).replace('0', '') }}";
+        </script>
+        <script src="{{ url_for('static', filename='Hobby_Tracker.js') }}"></script>
+    </body>
+</html>

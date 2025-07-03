@@ -1,0 +1,405 @@
+/* 💜 Elegant Violet Palette */
+:root {
+    --color-bg-light-violet: #f5f3ff; /* Light violet background */
+    --color-primary-accent-violet: #8b5cf6; /* Vivid violet */
+    --color-secondary-accent-violet: #a78bfa; /* Soft lavender */
+    --color-neutral-dark-text-violet: #1e1b4b; /* Deep indigo text */
+    --color-muted-gray-violet: #ede9fe; /* Muted lavender-gray */
+}
+
+body {
+    background-color: var(--color-bg-light-violet);
+    margin: 0;
+    background-color: black;
+}
+
+/* Is used to center the header */
+#headerContainer {
+    display: flex;
+    justify-content: center;
+}
+
+/* The header container where title and others resided */
+#header {
+    text-align: center;
+    margin-bottom: 50px;
+    background-color: var(--color-primary-accent-violet);
+    width: 500px;
+    margin: 15px;
+    border-radius: 20px;
+    padding-bottom: 25px;
+}
+
+#title {
+    font-size: 3.5rem;
+    color: var(--color-muted-gray-violet);
+}
+
+#streakText {
+    font-weight: bold;
+    font-size: 1.4rem;
+    background-color: black;
+    padding: 10px;
+    color: var(--color-muted-gray-violet);
+}
+
+/* Button to add new Habit */
+#addNewHabit {
+    background-color: hsl(244, 47%, 50%);
+    color: var(--color-muted-gray-violet);
+    border: none;
+    font-size: 1.4rem;
+    padding: 10px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+#addNewHabit:hover {
+    background-color: var(--color-neutral-dark-text-violet);
+}
+
+/* Just so can can add a background to the habit list */
+#containerBackground {
+    display: flex;
+    justify-content: center;
+}
+
+/* Container of the habit list */
+#container {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color-secondary-accent-violet);
+    border-radius: 25px;
+    width: 60vw;
+}
+#containerForHabbit {
+    width: 60vw;
+    position: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Title */
+#habitList {
+    padding: 15px 0;
+    background-color: var(--color-muted-gray-violet);
+    width: 80%;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 2.5rem;
+}
+
+/* The container habit Tracker title */
+.theHabit {
+    margin-left: 5%;
+    background-color: var(--color-neutral-dark-text-violet);
+    color: var(--color-bg-light-violet);
+    font-weight: bold;
+    font-size: 2rem;
+    display: inline-block;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+/* habit container */
+.habits {
+    background-color: var(--color-primary-accent-violet);
+    margin-bottom: 40px;
+    width: 60%;
+    position: relative;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+/* Streak text in the container habit tracker */
+.habitStreak {
+    padding: 5px 10px;
+    border-radius: 10px;
+    display: inline-block;
+    top: 13%;
+    margin-right: 7%;
+    text-align: right;
+    font-weight: bold;
+    font-size: 1.2rem;
+    background-color: var(--color-muted-gray-violet);
+    color: var(--color-neutral-dark-text-violet);
+    position: absolute;
+    right: 0;
+}
+
+/* the calendar and the buttons */
+.tableContainer {
+    width: 100%;
+    background-color: var(--color-muted-gray-violet);
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* The header or the day of the week */
+.tableContainer th {
+    background-color: var(--color-secondary-accent-violet);
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-weight: bold;
+    color: var(--color-muted-gray-violet);
+}
+
+/* The button to check you streak */
+.rowButton td {
+    width: 30px;
+    padding: 5px 0;
+    text-align: center;
+}
+/* The C button for the calendar */
+.rowButton td button:not(.updateBtn, .deleteBtn) {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    background-color: lightgreen;
+    font-weight: bold;
+    border-radius: 10px;
+    border: none;
+}
+.rowButton td button:hover:not(.updateBtn, .deleteBtn) {
+    background-color: hsl(120, 73%, 55%);
+}
+
+/* to target the header for the calendar */
+tr:first-child th:first-child {
+    width: 10px;
+}
+
+/* to handle the TD of the Buttons */
+.rowButton td:first-child {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: inherit;
+    height: 50px;
+    gap: 15px;
+}
+/* The update and delete button */
+.updateBtn,
+.deleteBtn {
+    font-size: 1.3rem;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 15px;
+}
+
+/* Designs the update Btn */
+.updateBtn {
+    background-color: var(--color-neutral-dark-text-violet);
+    color: var(--color-bg-light-violet);
+    font-weight: bold;
+}
+.updateBtn:hover {
+    background-color: hsl(244, 47%, 40%);
+    font-size: 1.4rem;
+}
+
+/* Designs the delete Btn */
+.deleteBtn {
+    background-color: red;
+    color: var(--color-muted-gray-violet);
+    font-weight: bold;
+}
+.deleteBtn:hover {
+    background-color: hsl(0, 100%, 40%);
+    font-size: 1.4rem;
+}
+
+/* The form to add data */
+#addHabitData {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+    background-color: var(--color-neutral-dark-text-violet);
+    width: 20vw;
+    height: 45vh;
+    position: fixed;
+    top: 30%;
+    z-index: 1000;
+}
+
+#formSubmitData {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-muted-gray-violet);
+    width: 15vw;
+    height: 35vh;
+    border-radius: 15px;
+}
+
+/* Exit Button for the form submit data */
+#exitButton {
+    position: absolute;
+    background-color: red;
+    width: 10%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    top: -10px;
+    right: -10px;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+}
+#exitButton:hover {
+    background-color: hsl(0, 100%, 30%);
+}
+
+/* form submit data label */
+#addHabitLabel {
+    width: 80%;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+/* The Text area to input data */
+#habitData {
+    width: 80%;
+    font-size: 15px;
+    font-weight: 525;
+    text-align: justify;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+/* submit data */
+#submitData {
+    font-weight: bold;
+    font-size: 1.4rem;
+    padding: 10px 15px;
+    margin-top: 70px;
+    border-radius: 15px;
+    background-color: var(--color-neutral-dark-text-violet);
+    color: var(--color-muted-gray-violet);
+    cursor: pointer;
+}
+#submitData:hover {
+    background-color: hwb(244 11% 31%);
+}
+
+/* the form to update data */
+#updateHabitData {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 15px;
+    background-color: var(--color-neutral-dark-text-violet);
+    width: 20vw;
+    height: 45vh;
+    position: fixed;
+    top: 30%;
+    z-index: 1000;
+}
+#updateSubmitData {
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-muted-gray-violet);
+    width: 15vw;
+    height: 35vh;
+    border-radius: 15px;
+}
+/* Exit Button for the form submit data */
+#exitButtonForUpdate {
+    position: absolute;
+    background-color: red;
+    width: 10%;
+    height: 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    top: -10px;
+    right: -10px;
+    font-size: 1.5rem;
+    color: white;
+    cursor: pointer;
+}
+#exitButtonForUpdate:hover {
+    background-color: hsl(0, 100%, 30%);
+}
+/* form submit data label */
+#updateHabitLabel {
+    width: 80%;
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+/* The Text area to input data */
+#updateHabitTxtarea {
+    width: 80%;
+    font-size: 15px;
+    font-weight: 525;
+    text-align: justify;
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+/* submit data */
+#updateSubmit {
+    font-weight: bold;
+    font-size: 1.4rem;
+    padding: 10px 15px;
+    margin-top: 70px;
+    border-radius: 15px;
+    background-color: var(--color-neutral-dark-text-violet);
+    color: var(--color-muted-gray-violet);
+    cursor: pointer;
+}
+#updateSubmit:hover {
+    background-color: hwb(244 11% 31%);
+}
+
+/* Delete data confirmatoin */
+#deleteHabitData {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    gap: 40px;
+    border-radius: 15px;
+    background-color: var(--color-neutral-dark-text-violet);
+    width: 20vw;
+    height: 20vh;
+    position: fixed;
+    top: 40%;
+    z-index: 1000;
+}
+
+/* Confirm and Cancel Delete */
+#confirmDelete,
+#cancelDelete {
+    font-size: 1.3rem;
+    border: none;
+    padding: 10px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    color: var(--color-bg-light-violet);
+    padding: 10px 15px;
+}
+#confirmDelete {
+    background-color: var(--color-primary-accent-violet);
+}
+#confirmDelete:hover {
+    background-color: hsl(258, 90%, 56%);
+    font-size: 1.5rem;
+}
+#cancelDelete {
+    background-color: var(--color-secondary-accent-violet);
+}
+#cancelDelete:hover {
+    background-color: hsl(255, 92%, 66%);
+    font-size: 1.5rem;
+}

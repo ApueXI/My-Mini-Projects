@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="ExpenseTracker.css" />
+        <title>Expense Tracker</title>
+    </head>
+    <body>
+        <h1 id="title">Expense Tracker</h1>
+        <div id="showAddItemContainer">
+            <button id="showAddItem">Add Item</button>
+        </div>
+        <div id="container">
+            <table id="tableData">
+                <tr>
+                    <th>Item</th>
+                    <th>Expense</th>
+                    <th>Category</th>
+                    <th>Reason</th>
+                    <th>Date</th>
+                    <th>Aciton</th>
+                </tr>
+                <tr>
+                    <td>game</td>
+                    <td>$105</td>
+                    <td>game</td>
+                    <td>i like it</td>
+                    <td>jan</td>
+                    <td><button>Delete</button></td>
+                </tr>
+                <tr>
+                    <td>game</td>
+                    <td>$105</td>
+                    <td>game</td>
+                    <td>i like it</td>
+                    <td>jan</td>
+                    <td><button>Delete</button></td>
+                </tr>
+            </table>
+            <br />
+        </div>
+
+        <br />
+        <div id="addItem">
+            <form action="" id="addDataForm">
+                <button type="button" id="exitButton">&times;</button>
+                <label for="itemValue">Item Name:</label><br />
+                <input
+                    type="text"
+                    name=""
+                    id="itemValue"
+                    class="formInput"
+                /><br />
+
+                <label for="expenseValue">Expense:</label><br />
+                <input
+                    type="number"
+                    name=""
+                    id="expenseValue"
+                    class="formInput"
+                /><br />
+
+                <label for="categoryValue">Category:</label><br />
+                <input
+                    type="text"
+                    name=""
+                    id="categoryValue"
+                    class="formInput"
+                /><br />
+
+                <label for="reasonValue">Reason:</label><br />
+                <input
+                    type="text"
+                    name=""
+                    id="reasonValue"
+                    class="formInput"
+                /><br />
+
+                <label for="dateValue">Date:</label><br />
+                <input
+                    type="text"
+                    name=""
+                    id="dateValue"
+                    class="formInput"
+                /><br />
+
+                <div id="formButtons">
+                    <button
+                        type="submit"
+                        onclick="submitData()"
+                        id="submitButton"
+                    >
+                        Submit
+                    </button>
+                    <input type="reset" name="" id="resetButton" />
+                </div>
+            </form>
+        </div>
+        <script src="ExpenseTracker.js"></script>
+    </body>
+</html>

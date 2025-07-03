@@ -1,0 +1,130 @@
+/* 💙 Cool & Clean Blue Palette */
+:root {
+    --color-bg-light-blue: #eff6ff; /* Light blue background */
+    --color-primary-accent-blue: #3b82f6; /* Vivid blue */
+    --color-secondary-accent-blue: #60a5fa; /* Softer sky blue */
+    --color-neutral-dark-text-blue: #1e3a8a; /* Deep navy text */
+    --color-muted-gray-blue: #dbeafe; /* Muted icy blue-gray */
+}
+body {
+    height: 90vh;
+    background-color: var(--color-bg-light-blue);
+}
+#title {
+    text-align: center;
+    font-size: 3rem;
+}
+#container {
+    display: flex;
+    justify-content: center;
+}
+#tableData {
+    background-color: var(--color-muted-gray-blue);
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid;
+}
+#tableData th,
+#tableData td {
+    border: 2px solid;
+    font-size: 1.6rem;
+    padding: 7px 25px;
+}
+#tableData td {
+    text-align: right;
+    overflow-wrap: break-word; /* break long words if needed */
+    word-break: break-word; /* optional: fallback for older browsers */
+    white-space: normal;
+    width: 15ch;
+}
+#tableData button {
+    width: inherit;
+    height: inherit;
+    padding: 0;
+    margin: 0;
+    font-size: 2rem;
+    border: none;
+    background-color: var(--color-secondary-accent-blue);
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+#tableData button:hover{
+    background-color: hwb(213 38% 22%);
+}
+#showAddItemContainer {
+    margin-bottom: 35px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+#showAddItem {
+    font-size: 1.3rem;
+    border-radius: 10px;
+    background-color: var(--color-primary-accent-blue);
+    color: white;
+    cursor: pointer;
+    padding: 10px 20px;
+}
+#showAddItem:hover {
+    border-radius: 10px;
+    background-color: hwb(217 23% 24%);
+}
+#addItem {
+    display: none;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    z-index: 1000;
+    top: 25vh;
+}
+#addDataForm {
+    font-size: 1.2rem;
+    width: 325px;
+    padding: 25px;
+    border-radius: 15px;
+    background-color: var(--color-primary-accent-blue);
+    color: var(--color-muted-gray-blue);
+    font-weight: bold;
+    position: relative;
+}
+#addDataForm .formInput {
+    width: 97.5%;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+#formButtons {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+#submitButton,
+#resetButton {
+    font-size: 1.2rem;
+    border-radius: 10px;
+    background-color: var(--color-neutral-dark-text-blue);
+    color: var(--color-bg-light-blue);
+    cursor: pointer;
+}
+#submitButton:hover,
+#resetButton:hover {
+    background-color: hwb(224 12% 66%);
+}
+#exitButton {
+    font-size: 2rem;
+    right: -10px;
+    top: -10px;
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    background-color: red;
+    color: white;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+}
+#exitButton:hover {
+    background-color: hsl(0, 100%, 40%);
+}

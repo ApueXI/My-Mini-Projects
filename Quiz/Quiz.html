@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="Quiz.css" />
+        <title>Quiz</title>
+    </head>
+    <body>
+        <button id="restartQuiz" onclick="restartQuiz()">Start/Restart</button>
+        <div id="questionBox">
+            <div class="timer"><h1 id="timerText">20</h1></div>
+            <div class="questionNumber"><h1 id="questionNumberText">1</h1></div>
+            <h1 id="questionText"></h1>
+        </div>
+        <div id="questionContainer">
+            <button id="answer1" class="answers"></button>
+            <button id="answer2" class="answers"></button>
+            <button id="answer3" class="answers"></button>
+            <button id="answer4" class="answers"></button>
+        </div>
+        <div id="quizOverBox">
+            <h1 id="quizOverText">Game is Over</h1>
+            <h1 id="scoreText">gasdg</h1>
+        </div>
+        <script src="Quiz.js"></script>
+    </body>
+</html>
