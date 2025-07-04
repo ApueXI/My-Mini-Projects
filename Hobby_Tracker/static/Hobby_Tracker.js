@@ -269,4 +269,5 @@ function handleDeleteSubmit(e) {
 }
 
 // displays the habit data
+// Testing in the second branch
 fetchData(apiURL);
