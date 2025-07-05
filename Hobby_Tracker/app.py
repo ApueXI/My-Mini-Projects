@@ -58,10 +58,10 @@ def receiveData():
         db.session.add(habbit)
         db.session.commit()
         print("Habit successfully added")
-        return jsonify({"status": 'success', "received" : data}), 200
+        return jsonify({"status": 'success', "received" : data, "from" : "Python"}), 200
     except Exception as e:
         print(f"Habit failed to be added\nError: {e}")
-        return jsonify({"status": 'error', "received" : data}), 500
+        return jsonify({"status": 'error', "received" : data, "from" : "Python"}), 500
 
 
 @app.route("/api/update/<int:id>", methods=["POST", "GET"])
@@ -76,12 +76,37 @@ def updateHabit(id):
         try:
             db.session.commit()
             print("Habit successfully updated")
-            return jsonify({"status" : "success", "received" : data, "ok" : True}), 200 
+            return jsonify({"status" : "success", "received" : data, "ok" : True, "from" : "Python"}), 200 
         except Exception as e:
             db.session.rollback()
             print(f"Habit failed to update \nError: {e}")
-            return jsonify({"status" : "error", "received" : data, "ok" : False}), 500 
+            return jsonify({"status" : "error", "received" : data, "ok" : False, "from" : "Python"}), 500 
     
+@app.route("/api/streakText/<int:id>", methods={"POST"})
+def handle_streak_text(id):
+    
+    streak_to_update = Habbit.query.get_or_404(id)
+    data = request.get_json()
+
+    if request.method == "POST":
+        streak_to_update.sunday = data["sunday"]
+        streak_to_update.monday = data["monday"]
+        streak_to_update.tuesday = data["tuesday"]
+        streak_to_update.wednesday = data["wednesday"]
+        streak_to_update.thursday = data["thursday"]
+        streak_to_update.friday = data["friday"]
+        streak_to_update.saturday = data["saturday"]
+
+        try:
+            db.session.commit()
+            print("Streak has updated")
+            return jsonify({"status" : "success", "received" : data, "ok" : True, "from" : "Python"}),200
+        except Exception as e:
+            db.session.rollback()
+            print(f"Streak Failed to update\n Error: {e}")
+            return jsonify({"status" : "error", "received" : data, "ok" : False, "from" : "Python"}),500
+
+
 
 @app.route("/api/delete/<int:id>", methods=["DELETE"])
 def deleteHabit(id):
@@ -91,12 +116,12 @@ def deleteHabit(id):
         db.session.delete(habit_to_delete)
         db.session.commit()
         print("Habit succesfully delete")
-        return jsonify({"status": "success", "message" : "Habit Deleted"}), 200
+        return jsonify({"status": "success", "message" : "Habit Deleted", "from" : "Python"}), 200
 
     except Exception as e:
         db.session.rollback()
         print(f"Habit failed to delete \nError: {e}")
-        return jsonify({"status" : "success", "nessage" : str(e)}), 500
+        return jsonify({"status" : "success", "nessage" : str(e), "from" : "Python"}), 500
 
 
 def create_database(app):

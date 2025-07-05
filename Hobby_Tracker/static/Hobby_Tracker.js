@@ -57,11 +57,62 @@ confirmBtn.addEventListener("click", handleDeleteSubmit);
 // Fetches the habit data from the backend for it then to be displayed
 async function fetchData(apiURL) {
     const response = await fetch(apiURL);
-    const data = await response.json();
+    const datas = await response.json();
 
     updateHabitTxtArea.value = "";
     habitData.value = "";
-    createLoopHabit(data);
+    createLoopHabit(datas);
+}
+
+// fetchiing data for button streak
+async function fetched_Calendar(apiURL) {
+    const response = await fetch(apiURL);
+    const datas = await response.json();
+
+    for (const data of datas) {
+        console.log(data);
+    }
+
+    // console.log(datas);
+}
+
+// Handles the streak calendar to the backend
+async function sendStreakData({
+    // Defaults a value, its a parameter
+    streakURL,
+    sundayD = false,
+    mondayD = false,
+    tuesdayD = false,
+    wednesdayD = false,
+    thursdayD = false,
+    fridayD = false,
+    saturdayD = false,
+}) {
+    const streak_to_send = {
+        // The data to send in the backend
+        sunday: sundayD,
+        monday: mondayD,
+        tuesday: tuesdayD,
+        wednesday: wednesdayD,
+        thursday: thursdayD,
+        friday: fridayD,
+        saturday: saturdayD,
+    };
+
+    const response = await fetch(streakURL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(streak_to_send),
+    });
+    const parsedData = await response.json();
+
+    console.log("------------------------------------");
+    console.log(response);
+    console.log(parsedData);
+    console.log(
+        `Send to the backend: ${parsedData.status} \nStatus: ${response.status} \nFrom JS File`
+    );
+    console.log("------------------------------------");
 }
 
 // Sends a new habit to the backend
@@ -74,11 +125,13 @@ async function sendData(sendURL, habitData) {
     });
 
     const data = await response.json();
+    console.log("------------------------------------");
     console.log(response);
     console.log(data);
     console.log(
-        `Sent to the backend: ${data.status} \nStatus: ${response.status}`
+        `Sent to the backend: ${data.status} \nStatus: ${response.status} \nFrom JS File`
     );
+    console.log("------------------------------------");
 
     addHabitData.style.display = "none";
 
@@ -96,11 +149,13 @@ async function updateHabit(updateURL, updatedHabitData) {
     });
 
     const data = await response.json();
+    console.log("------------------------------------");
     console.log(response);
     console.log(data);
     console.log(
-        `Send to the backend: ${data.status} \nStatus: ${response.status}`
+        `Send to the backend: ${data.status} \nStatus: ${response.status} \nFrom JS File`
     );
+    console.log("------------------------------------");
 
     container.innerHTML = "";
     fetchData(apiURL);
@@ -113,11 +168,14 @@ async function deleteHabit(deleteURL) {
     });
 
     const data = await response.json();
+    console.log("------------------------------------");
     console.log(response);
     console.log(data);
     console.log(
-        `Send to the backend: ${data.status} \nStatus ${response.status}`
+        `Send to the backend: ${data.status} \nStatus ${response.status} \nFrom JS File`
     );
+    console.log("------------------------------------");
+
     container.innerHTML = "";
     fetchData(apiURL);
 }
@@ -143,13 +201,13 @@ function createLoopHabit(data) {
         table.innerHTML = `
             <tr>
                 <th>Calendar:</th>
-                <th>S</th>
-                <th>M</th>
-                <th>T</th>
-                <th>W</th>
-                <th>T</th>
-                <th>F</th>
-                <th>S</th>
+                <th class="sunday">S</th>
+                <th class="monday">M</th>
+                <th class="tuesday">T</th>
+                <th class="wednesday">W</th>
+                <th class="thursday">T</th>
+                <th class="friday">F</th>
+                <th class="saturday">S</th>
             </tr>
             <tr class="rowButton">
                 <td>
@@ -180,6 +238,26 @@ function createLoopHabit(data) {
 
 // Give each button from the table row a function
 function selectButtons(div, data) {
+    const fullURL = `${streakURL}${data.id}`;
+
+    // const {
+    //     sunday: sundayBool,
+    //     monday: mondayBool,
+    //     tuesday: tuesdayBool,
+    //     wednesday: wednesdayBool,
+    //     thursday: thursdayBool,
+    //     friday: fridayBool,
+    //     saturday: saturdayBool,
+    // } = fetched_data;
+
+    let isTrueSunday = false;
+    let isTrueMonday = false;
+    let isTrueTuesday = false;
+    let isTrueaWednesday = false;
+    let isTrueThursday = false;
+    let isTrueFriday = false;
+    let isTrueSaturday = false;
+
     const sundayBtn = div.querySelector(".sundayBtn");
     const mondayBtn = div.querySelector(".mondayBtn");
     const tuesdayBtn = div.querySelector(".tuesdayBtn");
@@ -187,36 +265,73 @@ function selectButtons(div, data) {
     const thursdayBtn = div.querySelector(".thursdayBtn");
     const fridayBtn = div.querySelector(".fridayBtn");
     const saturdayBtn = div.querySelector(".saturdayBtn");
+
     const updateBtn = div.querySelector(".updateBtn");
     const deleteBtn = div.querySelector(".deleteBtn");
 
+    const sundayText = div.querySelector(".sunday");
+    const mondayText = div.querySelector(".monday");
+    const tuesdayText = div.querySelector(".tuesday");
+    const wednesdayText = div.querySelector(".wednesday");
+    const thursdayText = div.querySelector(".thursday");
+    const fridayText = div.querySelector(".friday");
+    const saturdayText = div.querySelector(".saturday");
+
     sundayBtn.addEventListener("click", () => {
-        document.body.style.backgroundColor = "black";
+        isTrueSunday == true ? (isTrueSunday = false) : (isTrueSunday = true);
+
         console.log(data.id);
+
+        sendStreakData({ streakURL: fullURL, sundayD: isTrueSunday });
     });
     mondayBtn.addEventListener("click", () => {
-        document.body.style.backgroundColor = "white";
+        isTrueMonday == true ? (isTrueMonday = false) : (isTrueMonday = true);
+
         console.log(data.id);
+
+        sendStreakData({ streakURL: fullURL, mondayD: isTrueMonday });
     });
     tuesdayBtn.addEventListener("click", () => {
-        document.body.style.backgroundColor = "black";
+        isTrueTuesday == true
+            ? (isTrueTuesday = false)
+            : (isTrueTuesday = true);
+
         console.log(data.id);
+
+        sendStreakData({ streakURL: fullURL, tuesdayD: isTrueTuesday });
     });
     wednesdayBtn.addEventListener("click", () => {
-        document.body.style.backgroundColor = "white";
+        isTrueaWednesday == true
+            ? (isTrueaWednesday = false)
+            : (isTrueaWednesday = true);
+
         console.log(data.id);
+
+        sendStreakData({ streakURL: fullURL, wednesdayD: isTrueaWednesday });
     });
     thursdayBtn.addEventListener("click", () => {
-        document.body.style.backgroundColor = "black";
+        isTrueThursday == true
+            ? (isTrueThursday = false)
+            : (isTrueThursday = true);
+
         console.log(data.id);
+
+        sendStreakData({ streakURL: fullURL, thursdayD: isTrueThursday });
     });
     fridayBtn.addEventListener("click", () => {
-        document.body.style.backgroundColor = "white";
+        isTrueFriday == true ? (isTrueFriday = false) : (isTrueFriday = true);
+
         console.log(data.id);
+        sendStreakData({ streakURL: fullURL, fridayD: isTrueFriday });
     });
     saturdayBtn.addEventListener("click", () => {
-        document.body.style.backgroundColor = "black";
-        console.log(data.content);
+        isTrueSaturday == true
+            ? (isTrueSaturday = false)
+            : (isTrueSaturday = true);
+
+        console.log(data.id);
+
+        sendStreakData({ streakURL: fullURL, saturdayD: isTrueSaturday });
     });
     updateBtn.addEventListener("click", () => {
         updateHabitData.style.display = "flex"; // show the update form
@@ -270,3 +385,4 @@ function handleDeleteSubmit(e) {
 
 // displays the habit data
 fetchData(apiURL);
+fetched_Calendar(apiURL);

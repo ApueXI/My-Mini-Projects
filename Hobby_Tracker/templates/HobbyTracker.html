@@ -99,6 +99,8 @@
                 "{{ url_for('updateHabit', id=0).replace('0','') }}";
             const deleteURL =
                 "{{ url_for('deleteHabit', id=0).replace('0', '') }}";
+            const streakURL =
+                "{{ url_for('handle_streak_text', id=0).replace('0', '') }}";
         </script>
         <script src="{{ url_for('static', filename='Hobby_Tracker.js') }}"></script>
     </body>
