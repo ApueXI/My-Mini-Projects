@@ -64,21 +64,52 @@ async function fetchData(apiURL) {
     createLoopHabit(datas);
 }
 
-// fetchiing data for button streak
+// hadnles the display of streak calendar
 async function fetched_Calendar(apiURL) {
+    const sunday_text = document.getElementsByClassName("sunday");
+    const monday_text = document.getElementsByClassName("monday");
+    const tuesday_text = document.getElementsByClassName("tuesday");
+    const wednesday_text = document.getElementsByClassName("wednesday");
+    const thursday_text = document.getElementsByClassName("thursday");
+    const friday_text = document.getElementsByClassName("friday");
+    const saturday_text = document.getElementsByClassName("saturday");
     const response = await fetch(apiURL);
     const datas = await response.json();
 
-    for (const data of datas) {
-        console.log(data);
-    }
+    for (let index = 0; index < datas.length; index++) {
+        datas[index].sunday == true
+            ? (sunday_text[index].style.backgroundColor = "red")
+            : (sunday_text[index].style.backgroundColor = "#a78bfa");
 
-    // console.log(datas);
+        datas[index].monday == true
+            ? (monday_text[index].style.backgroundColor = "red")
+            : (monday_text[index].style.backgroundColor = "#a78bfa");
+
+        datas[index].tuesday == true
+            ? (tuesday_text[index].style.backgroundColor = "red")
+            : (tuesday_text[index].style.backgroundColor = "#a78bfa");
+
+        datas[index].wednesday == true
+            ? (wednesday_text[index].style.backgroundColor = "red")
+            : (wednesday_text[index].style.backgroundColor = "#a78bfa");
+
+        datas[index].thursday == true
+            ? (thursday_text[index].style.backgroundColor = "red")
+            : (thursday_text[index].style.backgroundColor = "#a78bfa");
+
+        datas[index].friday == true
+            ? (friday_text[index].style.backgroundColor = "red")
+            : (friday_text[index].style.backgroundColor = "#a78bfa");
+
+        datas[index].saturday == true
+            ? (saturday_text[index].style.backgroundColor = "red")
+            : (saturday_text[index].style.backgroundColor = "#a78bfa");
+    }
 }
 
 // Handles the streak calendar to the backend
 async function sendStreakData({
-    // Defaults a value, its a parameter
+    // accepts these kinds of parameter and defaults to false if no given value
     streakURL,
     sundayD = false,
     mondayD = false,
@@ -240,23 +271,13 @@ function createLoopHabit(data) {
 function selectButtons(div, data) {
     const fullURL = `${streakURL}${data.id}`;
 
-    // const {
-    //     sunday: sundayBool,
-    //     monday: mondayBool,
-    //     tuesday: tuesdayBool,
-    //     wednesday: wednesdayBool,
-    //     thursday: thursdayBool,
-    //     friday: fridayBool,
-    //     saturday: saturdayBool,
-    // } = fetched_data;
-
-    let isTrueSunday = false;
-    let isTrueMonday = false;
-    let isTrueTuesday = false;
-    let isTrueaWednesday = false;
-    let isTrueThursday = false;
-    let isTrueFriday = false;
-    let isTrueSaturday = false;
+    let isTrueSunday = !!data.sunday;
+    let isTrueMonday = !!data.monday;
+    let isTrueTuesday = !!data.tuesday;
+    let isTrueWednesday = !!data.wednesday;
+    let isTrueThursday = !!data.thursday;
+    let isTrueFriday = !!data.friday;
+    let isTrueSaturday = !!data.saturday;
 
     const sundayBtn = div.querySelector(".sundayBtn");
     const mondayBtn = div.querySelector(".mondayBtn");
@@ -278,58 +299,79 @@ function selectButtons(div, data) {
     const saturdayText = div.querySelector(".saturday");
 
     sundayBtn.addEventListener("click", () => {
-        isTrueSunday == true ? (isTrueSunday = false) : (isTrueSunday = true);
-
-        console.log(data.id);
+        if (isTrueSunday) {
+            isTrueSunday = false;
+            sundayText.style.backgroundColor = "#a78bfa";
+        } else {
+            isTrueSunday = true;
+            sundayText.style.backgroundColor = "red";
+        }
 
         sendStreakData({ streakURL: fullURL, sundayD: isTrueSunday });
     });
     mondayBtn.addEventListener("click", () => {
-        isTrueMonday == true ? (isTrueMonday = false) : (isTrueMonday = true);
-
-        console.log(data.id);
+        if (isTrueMonday) {
+            isTrueMonday = false;
+            mondayText.style.backgroundColor = "#a78bfa";
+        } else {
+            isTrueMonday = true;
+            mondayText.style.backgroundColor = "red";
+        }
 
         sendStreakData({ streakURL: fullURL, mondayD: isTrueMonday });
     });
     tuesdayBtn.addEventListener("click", () => {
-        isTrueTuesday == true
-            ? (isTrueTuesday = false)
-            : (isTrueTuesday = true);
-
-        console.log(data.id);
+        if (isTrueTuesday) {
+            isTrueTuesday = false;
+            tuesdayText.style.backgroundColor = "#a78bfa";
+        } else {
+            isTrueTuesday = true;
+            tuesdayText.style.backgroundColor = "red";
+        }
 
         sendStreakData({ streakURL: fullURL, tuesdayD: isTrueTuesday });
     });
     wednesdayBtn.addEventListener("click", () => {
-        isTrueaWednesday == true
-            ? (isTrueaWednesday = false)
-            : (isTrueaWednesday = true);
+        if (isTrueWednesday) {
+            isTrueWednesday = false;
+            wednesdayText.style.backgroundColor = "#a78bfa";
+        } else {
+            isTrueWednesday = true;
+            wednesdayText.style.backgroundColor = "red";
+        }
 
-        console.log(data.id);
-
-        sendStreakData({ streakURL: fullURL, wednesdayD: isTrueaWednesday });
+        sendStreakData({ streakURL: fullURL, wednesdayD: isTrueWednesday });
     });
     thursdayBtn.addEventListener("click", () => {
-        isTrueThursday == true
-            ? (isTrueThursday = false)
-            : (isTrueThursday = true);
-
-        console.log(data.id);
+        if (isTrueThursday) {
+            isTrueThursday = false;
+            thursdayText.style.backgroundColor = "#a78bfa";
+        } else {
+            isTrueThursday = true;
+            thursdayText.style.backgroundColor = "red";
+        }
 
         sendStreakData({ streakURL: fullURL, thursdayD: isTrueThursday });
     });
     fridayBtn.addEventListener("click", () => {
-        isTrueFriday == true ? (isTrueFriday = false) : (isTrueFriday = true);
+        if (isTrueFriday) {
+            isTrueFriday = false;
+            fridayText.style.backgroundColor = "#a78bfa";
+        } else {
+            isTrueFriday = true;
+            fridayText.style.backgroundColor = "red";
+        }
 
-        console.log(data.id);
         sendStreakData({ streakURL: fullURL, fridayD: isTrueFriday });
     });
     saturdayBtn.addEventListener("click", () => {
-        isTrueSaturday == true
-            ? (isTrueSaturday = false)
-            : (isTrueSaturday = true);
-
-        console.log(data.id);
+        if (isTrueSaturday) {
+            isTrueSaturday = false;
+            saturdayText.style.backgroundColor = "#a78bfa";
+        } else {
+            isTrueSaturday = true;
+            saturdayText.style.backgroundColor = "red";
+        }
 
         sendStreakData({ streakURL: fullURL, saturdayD: isTrueSaturday });
     });
@@ -385,4 +427,4 @@ function handleDeleteSubmit(e) {
 
 // displays the habit data
 fetchData(apiURL);
-fetched_Calendar(apiURL);
+// fetched_Calendar(apiURL);
