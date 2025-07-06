@@ -35,12 +35,12 @@ exitBtnForUpdate.addEventListener("click", () => {
 
 // Submit Button for add a new habit
 submitData.addEventListener("click", (e) => {
-    const habitData = document.getElementById("habitData").value;
+    const habitvalue = document.getElementById("habitData").value;
 
     // To prevent page refresh
     e.preventDefault();
 
-    sendData(sendURL, habitData);
+    sendData(sendURL, habitvalue);
 });
 
 // Cancel Button for the Delete Button
@@ -66,44 +66,29 @@ async function fetchData(apiURL) {
 
 // hadnles the display of streak calendar
 async function fetched_Calendar(apiURL) {
-    const sunday_text = document.getElementsByClassName("sunday");
-    const monday_text = document.getElementsByClassName("monday");
-    const tuesday_text = document.getElementsByClassName("tuesday");
-    const wednesday_text = document.getElementsByClassName("wednesday");
-    const thursday_text = document.getElementsByClassName("thursday");
-    const friday_text = document.getElementsByClassName("friday");
-    const saturday_text = document.getElementsByClassName("saturday");
     const response = await fetch(apiURL);
     const datas = await response.json();
 
-    for (let index = 0; index < datas.length; index++) {
-        datas[index].sunday == true
-            ? (sunday_text[index].style.backgroundColor = "red")
-            : (sunday_text[index].style.backgroundColor = "#a78bfa");
+    const days = [
+        "sunday",
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+    ];
 
-        datas[index].monday == true
-            ? (monday_text[index].style.backgroundColor = "red")
-            : (monday_text[index].style.backgroundColor = "#a78bfa");
-
-        datas[index].tuesday == true
-            ? (tuesday_text[index].style.backgroundColor = "red")
-            : (tuesday_text[index].style.backgroundColor = "#a78bfa");
-
-        datas[index].wednesday == true
-            ? (wednesday_text[index].style.backgroundColor = "red")
-            : (wednesday_text[index].style.backgroundColor = "#a78bfa");
-
-        datas[index].thursday == true
-            ? (thursday_text[index].style.backgroundColor = "red")
-            : (thursday_text[index].style.backgroundColor = "#a78bfa");
-
-        datas[index].friday == true
-            ? (friday_text[index].style.backgroundColor = "red")
-            : (friday_text[index].style.backgroundColor = "#a78bfa");
-
-        datas[index].saturday == true
-            ? (saturday_text[index].style.backgroundColor = "red")
-            : (saturday_text[index].style.backgroundColor = "#a78bfa");
+    // loop thorough the days, because i have 7 days in the calendar and i need to check every header
+    for (const day of days) {
+        // loops through each individual habit's calendar to assign a BG color
+        // i need the outer loop to check each days cuz without it, the loop will only assign a specific day
+        for (let index = 0; index < datas.length; index++) {
+            const dayColor = document.getElementsByClassName(day)[index];
+            datas[index][day] === true
+                ? (dayColor.style.backgroundColor = "red")
+                : (dayColor.style.backgroundColor = "#a78bfa");
+        }
     }
 }
 
@@ -111,23 +96,23 @@ async function fetched_Calendar(apiURL) {
 async function sendStreakData({
     // accepts these kinds of parameter and defaults to false if no given value
     streakURL,
-    sundayD = false,
-    mondayD = false,
-    tuesdayD = false,
-    wednesdayD = false,
-    thursdayD = false,
-    fridayD = false,
-    saturdayD = false,
+    sunday,
+    monday,
+    tuesday,
+    wednesday,
+    thursday,
+    friday,
+    saturday,
 }) {
     const streak_to_send = {
         // The data to send in the backend
-        sunday: sundayD,
-        monday: mondayD,
-        tuesday: tuesdayD,
-        wednesday: wednesdayD,
-        thursday: thursdayD,
-        friday: fridayD,
-        saturday: saturdayD,
+        sunday,
+        monday,
+        tuesday,
+        wednesday,
+        thursday,
+        friday,
+        saturday,
     };
 
     const response = await fetch(streakURL, {
@@ -271,110 +256,40 @@ function createLoopHabit(data) {
 function selectButtons(div, data) {
     const fullURL = `${streakURL}${data.id}`;
 
-    let isTrueSunday = !!data.sunday;
-    let isTrueMonday = !!data.monday;
-    let isTrueTuesday = !!data.tuesday;
-    let isTrueWednesday = !!data.wednesday;
-    let isTrueThursday = !!data.thursday;
-    let isTrueFriday = !!data.friday;
-    let isTrueSaturday = !!data.saturday;
-
-    const sundayBtn = div.querySelector(".sundayBtn");
-    const mondayBtn = div.querySelector(".mondayBtn");
-    const tuesdayBtn = div.querySelector(".tuesdayBtn");
-    const wednesdayBtn = div.querySelector(".wednesdayBtn");
-    const thursdayBtn = div.querySelector(".thursdayBtn");
-    const fridayBtn = div.querySelector(".fridayBtn");
-    const saturdayBtn = div.querySelector(".saturdayBtn");
-
     const updateBtn = div.querySelector(".updateBtn");
     const deleteBtn = div.querySelector(".deleteBtn");
 
-    const sundayText = div.querySelector(".sunday");
-    const mondayText = div.querySelector(".monday");
-    const tuesdayText = div.querySelector(".tuesday");
-    const wednesdayText = div.querySelector(".wednesday");
-    const thursdayText = div.querySelector(".thursday");
-    const fridayText = div.querySelector(".friday");
-    const saturdayText = div.querySelector(".saturday");
+    const daysState = {
+        sunday: !!data.sunday,
+        monday: !!data.monday,
+        tuesday: !!data.tuesday,
+        wednesday: !!data.wednesday,
+        thursday: !!data.thursday,
+        friday: !!data.friday,
+        saturday: !!data.saturday,
+    };
 
-    sundayBtn.addEventListener("click", () => {
-        if (isTrueSunday) {
-            isTrueSunday = false;
-            sundayText.style.backgroundColor = "#a78bfa";
-        } else {
-            isTrueSunday = true;
-            sundayText.style.backgroundColor = "red";
-        }
+    const days = [
+        "sunday",
+        "monday",
+        "tuesday",
+        "wednesday",
+        "thursday",
+        "friday",
+        "saturday",
+    ];
 
-        sendStreakData({ streakURL: fullURL, sundayD: isTrueSunday });
+    // gives each streak button a function
+    days.forEach((day) => {
+        const btn = div.querySelector(`.${day}Btn`);
+        const text = div.querySelector(`.${day}`);
+        btn.addEventListener("click", () => {
+            daysState[day] = !daysState[day];
+            text.style.backgroundColor = daysState[day] ? "red" : "#a78bfa";
+            sendStreakData({ streakURL: fullURL, ...daysState });
+        });
     });
-    mondayBtn.addEventListener("click", () => {
-        if (isTrueMonday) {
-            isTrueMonday = false;
-            mondayText.style.backgroundColor = "#a78bfa";
-        } else {
-            isTrueMonday = true;
-            mondayText.style.backgroundColor = "red";
-        }
 
-        sendStreakData({ streakURL: fullURL, mondayD: isTrueMonday });
-    });
-    tuesdayBtn.addEventListener("click", () => {
-        if (isTrueTuesday) {
-            isTrueTuesday = false;
-            tuesdayText.style.backgroundColor = "#a78bfa";
-        } else {
-            isTrueTuesday = true;
-            tuesdayText.style.backgroundColor = "red";
-        }
-
-        sendStreakData({ streakURL: fullURL, tuesdayD: isTrueTuesday });
-    });
-    wednesdayBtn.addEventListener("click", () => {
-        if (isTrueWednesday) {
-            isTrueWednesday = false;
-            wednesdayText.style.backgroundColor = "#a78bfa";
-        } else {
-            isTrueWednesday = true;
-            wednesdayText.style.backgroundColor = "red";
-        }
-
-        sendStreakData({ streakURL: fullURL, wednesdayD: isTrueWednesday });
-    });
-    thursdayBtn.addEventListener("click", () => {
-        if (isTrueThursday) {
-            isTrueThursday = false;
-            thursdayText.style.backgroundColor = "#a78bfa";
-        } else {
-            isTrueThursday = true;
-            thursdayText.style.backgroundColor = "red";
-        }
-
-        sendStreakData({ streakURL: fullURL, thursdayD: isTrueThursday });
-    });
-    fridayBtn.addEventListener("click", () => {
-        if (isTrueFriday) {
-            isTrueFriday = false;
-            fridayText.style.backgroundColor = "#a78bfa";
-        } else {
-            isTrueFriday = true;
-            fridayText.style.backgroundColor = "red";
-        }
-
-        sendStreakData({ streakURL: fullURL, fridayD: isTrueFriday });
-    });
-    saturdayBtn.addEventListener("click", () => {
-        if (isTrueSaturday) {
-            isTrueSaturday = false;
-            saturdayText.style.backgroundColor = "#a78bfa";
-        } else {
-            isTrueSaturday = true;
-            saturdayText.style.backgroundColor = "red";
-        }
-
-        sendStreakData({ streakURL: fullURL, saturdayD: isTrueSaturday });
-    });
     updateBtn.addEventListener("click", () => {
         updateHabitData.style.display = "flex"; // show the update form
         addHabitData.style.display = "none";
@@ -387,6 +302,7 @@ function selectButtons(div, data) {
         // store the ID globally so the submit knows what to update
         handleUpdateSubmit.currentId = data.id;
     });
+
     deleteBtn.addEventListener("click", () => {
         deleteHabitData.style.display = "flex";
         updateHabitData.style.display = "none";
@@ -398,7 +314,7 @@ function selectButtons(div, data) {
 
 // Function that updates the habit
 function handleUpdateSubmit(e) {
-    e.preventDefault();
+    e?.preventDefault();
     const updatedHabitData =
         document.getElementById("updateHabitTxtarea").value;
     const fullUrl = `${updateURL}${handleUpdateSubmit.currentId}`;
@@ -413,7 +329,7 @@ function handleUpdateSubmit(e) {
 
 // function that deletes the habit
 function handleDeleteSubmit(e) {
-    e.preventDefault();
+    e?.preventDefault();
     const fullDeleteURL = `${deleteURL}${handleDeleteSubmit.currentId}`;
 
     deleteHabitData.style.display = "none";
@@ -421,10 +337,10 @@ function handleDeleteSubmit(e) {
     console.log(`The delete submit: ${handleDeleteSubmit.currentId}`);
     console.log("");
 
-    updateHabitTxtArea.textContent = "";
+    updateHabitTxtArea.value = "";
     deleteHabit(fullDeleteURL);
 }
 
 // displays the habit data
 fetchData(apiURL);
-// fetched_Calendar(apiURL);
+fetched_Calendar(apiURL);
