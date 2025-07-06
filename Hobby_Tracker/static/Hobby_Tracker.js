@@ -68,6 +68,7 @@ async function fetchData(apiURL) {
 async function fetched_Calendar(apiURL) {
     const response = await fetch(apiURL);
     const datas = await response.json();
+    const paragraph = document.getElementsByClassName("habitStreak");
 
     const days = [
         "sunday",
@@ -79,16 +80,41 @@ async function fetched_Calendar(apiURL) {
         "saturday",
     ];
 
-    // loop thorough the days, because i have 7 days in the calendar and i need to check every header
-    for (const day of days) {
-        // loops through each individual habit's calendar to assign a BG color
-        // i need the outer loop to check each days cuz without it, the loop will only assign a specific day
-        for (let index = 0; index < datas.length; index++) {
+    // Loop thorugh each data habit
+    for (let index = 0; index < datas.length; index++) {
+        let streakCount = 0;
+
+        // assings BG Color and the streakcount
+        for (const day of days) {
             const dayColor = document.getElementsByClassName(day)[index];
-            datas[index][day] === true
-                ? (dayColor.style.backgroundColor = "red")
-                : (dayColor.style.backgroundColor = "#a78bfa");
+
+            if (datas[index][day] === true) {
+                dayColor.style.backgroundColor = "red";
+                streakCount++;
+            } else {
+                dayColor.style.backgroundColor = "#a78bfa";
+            }
         }
+
+        paragraph[index].textContent = `Streak: ${streakCount} Days`;
+    }
+}
+
+// is just to dynamically show the streak data and it does not need to refresh to load data
+async function streak_Calendar_for_buttons(days) {
+    const response = await fetch(apiURL);
+    const datas = await response.json();
+    const paragraph = document.getElementsByClassName("habitStreak");
+
+    for (let index = 0; index < datas.length; index++) {
+        let streakCount = 0;
+
+        for (const day of days) {
+            if (datas[index][day] !== true) continue;
+            streakCount++;
+        }
+
+        paragraph[index].textContent = `Streak: ${streakCount} Days`;
     }
 }
 
@@ -193,6 +219,7 @@ async function deleteHabit(deleteURL) {
     console.log("------------------------------------");
 
     container.innerHTML = "";
+    fetched_Calendar(apiURL);
     fetchData(apiURL);
 }
 
@@ -286,6 +313,7 @@ function selectButtons(div, data) {
         btn.addEventListener("click", () => {
             daysState[day] = !daysState[day];
             text.style.backgroundColor = daysState[day] ? "red" : "#a78bfa";
+            streak_Calendar_for_buttons(days);
             sendStreakData({ streakURL: fullURL, ...daysState });
         });
     });
