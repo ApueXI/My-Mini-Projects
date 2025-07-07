@@ -383,4 +383,6 @@ function handleDeleteSubmit(e) {
 
 // displays the habit data
 fetchData(apiURL);
+
+// used to display streak text
 fetched_Calendar(apiURL);
