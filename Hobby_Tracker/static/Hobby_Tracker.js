@@ -309,12 +309,14 @@ function selectButtons(div, data, streakText) {
     days.forEach((day) => {
         const btn = div.querySelector(`.${day}Btn`);
         const text = div.querySelector(`.${day}`);
-        btn.addEventListener("click", () => {
+        const debouncedClick = debounce(() => {
             daysState[day] = !daysState[day];
             text.style.backgroundColor = daysState[day] ? "red" : "#a78bfa";
             streak_Calendar_for_buttons(days, daysState, streakText);
             sendStreakData({ streakURL: fullURL, ...daysState });
-        });
+        }, 1000); // 300ms debounce delay, adjust as needed
+
+        btn.addEventListener("click", debouncedClick);
     });
 
     updateBtn.addEventListener("click", () => {
@@ -337,6 +339,17 @@ function selectButtons(div, data, streakText) {
 
         handleDeleteSubmit.currentId = data.id;
     });
+}
+
+// from chat gpt
+function debounce(func, delay) {
+    let timeoutId;
+    return function (...args) {
+        if (timeoutId) clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            func.apply(this, args);
+        }, delay);
+    };
 }
 
 // Function that updates the habit
@@ -370,4 +383,6 @@ function handleDeleteSubmit(e) {
 
 // displays the habit data
 fetchData(apiURL);
+
+// used to display streak text
 fetched_Calendar(apiURL);
