@@ -35,14 +35,6 @@ body {
     color: var(--color-muted-gray-violet);
 }
 
-#streakText {
-    font-weight: bold;
-    font-size: 1.4rem;
-    background-color: black;
-    padding: 10px;
-    color: var(--color-muted-gray-violet);
-}
-
 /* Button to add new Habit */
 #addNewHabit {
     background-color: hsl(244, 47%, 50%);
