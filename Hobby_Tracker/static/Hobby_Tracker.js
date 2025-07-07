@@ -101,20 +101,19 @@ async function fetched_Calendar(apiURL) {
 }
 
 // is just to dynamically show the streak data and it does not need to refresh to load data
-async function streak_Calendar_for_buttons(days) {
+async function streak_Calendar_for_buttons(days, daystate, paragraph) {
     const response = await fetch(apiURL);
     const datas = await response.json();
-    const paragraph = document.getElementsByClassName("habitStreak");
 
     for (let index = 0; index < datas.length; index++) {
         let streakCount = 0;
 
         for (const day of days) {
-            if (datas[index][day] !== true) continue;
+            if (daystate[day] !== true) continue;
             streakCount++;
         }
 
-        paragraph[index].textContent = `Streak: ${streakCount} Days`;
+        paragraph.textContent = `Streak: ${streakCount} Days`;
     }
 }
 
@@ -273,14 +272,14 @@ function createLoopHabit(data) {
         div.appendChild(table);
         fragment.appendChild(div);
 
-        selectButtons(div, habit);
+        selectButtons(div, habit, streakText);
     });
 
     container.appendChild(fragment);
 }
 
 // Give each button from the table row a function
-function selectButtons(div, data) {
+function selectButtons(div, data, streakText) {
     const fullURL = `${streakURL}${data.id}`;
 
     const updateBtn = div.querySelector(".updateBtn");
@@ -313,7 +312,7 @@ function selectButtons(div, data) {
         btn.addEventListener("click", () => {
             daysState[day] = !daysState[day];
             text.style.backgroundColor = daysState[day] ? "red" : "#a78bfa";
-            streak_Calendar_for_buttons(days);
+            streak_Calendar_for_buttons(days, daysState, streakText);
             sendStreakData({ streakURL: fullURL, ...daysState });
         });
     });
