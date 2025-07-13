@@ -1,0 +1,82 @@
+/* 🌱 Fresh & Natural Green Palette */
+:root {
+    --color-bg-light-green: #f0fdf4; /* Light minty background */
+    --color-primary-accent-green: #22c55e; /* Vibrant green */
+    --color-secondary-accent-green: #4ade80; /* Softer lime green */
+    --color-neutral-dark-text-green: #14532d; /* Deep forest text */
+    --color-muted-gray-green: #dcfce7; /* Muted pale green-gray */
+}
+
+.body {
+    height: 100vh;
+}
+.body,
+.navBarBG,
+.navBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    background-color: var(--color-primary-accent-green);
+    height: 50vh;
+    width: 40vw;
+    border-radius: 20px;
+    box-shadow: 5px 5px 7px var(--color-neutral-dark-text-green);
+    position: relative;
+}
+
+.title {
+    color: var(--color-bg-light-green);
+    background-color: var(--color-neutral-dark-text-green);
+    height: 60px;
+    margin-top: 40px;
+    text-align: center;
+    padding-top: 30px;
+}
+
+.navBar {
+    width: inherit;
+    height: 15vh;
+    margin-top: 12vh;
+}
+
+.navBarBG {
+    background-color: hsl(144, 62%, 20%, 0.6);
+    width: 350px;
+    height: inherit;
+    position: relative;
+    flex-direction: row;
+    border-radius: 10px;
+}
+
+.navBarTitle {
+    position: absolute;
+    background-color: var(--color-bg-light-green);
+    top: -45px;
+    left: -15px;
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.navBarlink {
+    background-color: var(--color-muted-gray-green);
+    padding: 10px 15px;
+    margin: 0px 10px;
+    border-radius: 50px;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+.navBarlink:hover {
+    background-color: hsl(142, 85%, 72%);
+    transition: background-color 0.35s ease;
+    font-size: 1.5rem;
+    transition: font-size .3s ease;
+}
+.navBarlink:active {
+    color: blue;
+}
