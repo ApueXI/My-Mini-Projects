@@ -314,7 +314,7 @@ function selectButtons(div, data, streakText) {
             text.style.backgroundColor = daysState[day] ? "red" : "#a78bfa";
             streak_Calendar_for_buttons(days, daysState, streakText);
             sendStreakData({ streakURL: fullURL, ...daysState });
-        }, 1000); // 300ms debounce delay, adjust as needed
+        }, 500); // 300ms debounce delay, adjust as needed
 
         btn.addEventListener("click", debouncedClick);
     });
