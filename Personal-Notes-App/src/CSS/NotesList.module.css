@@ -1,0 +1,77 @@
+/* 🌱 Fresh & Natural Green Palette */
+:root {
+    --color-bg-light-green: #f0fdf4; /* Light minty background */
+    --color-primary-accent-green: #22c55e; /* Vibrant green */
+    --color-secondary-accent-green: #4ade80; /* Softer lime green */
+    --color-neutral-dark-text-green: #14532d; /* Deep forest text */
+    --color-muted-gray-green: #dcfce7; /* Muted pale green-gray */
+}
+
+.body {
+    height: 100vh;
+}
+
+.titleBG {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+.title {
+    box-shadow: 3px 3px 5px black;
+    margin: 0;
+    padding: 10px 15px;
+    border-radius: 10px;
+    width: 300px;
+    text-align: center;
+    background-color: var(--color-neutral-dark-text-green);
+    color: var(--color-bg-light-green);
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.notesBG {
+    background-color: var(--color-neutral-dark-text-green);
+    width: 500px;
+    height: inherit;
+    position: relative;
+    margin-top: 100px;
+    padding: 0 25px;
+    padding-bottom: 70px;
+    border-radius: 15px;
+    box-shadow: 2px 2px 5px black;
+}
+
+.notesContainer {
+    background-color: var(--color-muted-gray-green);
+    padding: 20px 50px;
+    font-size: 1.5rem;
+    box-shadow: 2px 2px 5px black;
+    border-radius: 15px;
+}
+
+.backBtn {
+    text-decoration: none;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: var(--color-primary-accent-green);
+    color: var(--color-bg-light-green);
+    padding: 10px 15px;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-radius: 10px;
+    box-shadow: 2px 2px 3px black;
+}
+.backBtn:hover {
+    background-color: hsl(142, 71%, 30%);
+    transition: background-color 0.3s ease;
+    font-size: 1.4rem;
+    transition: font-size 0.3s ease;
+}
+.backBtn:active {
+    color: blue;
+}
