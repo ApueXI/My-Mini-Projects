@@ -8,7 +8,17 @@
 }
 
 .body {
-    height: 100vh;
+    height: 80vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.addNotes {
+    position: fixed;
+    top: 30vh;
+    border-radius: 5px;
 }
 
 .titleBG {
@@ -17,7 +27,7 @@
     justify-content: center;
 }
 .title {
-    box-shadow: 3px 3px 5px black;
+    box-shadow: 2px 0 5px black, -2px 0 5px black;
     margin: 0;
     padding: 10px 15px;
     border-radius: 10px;
@@ -30,6 +40,7 @@
 .container {
     display: flex;
     flex-direction: column;
+    margin-top: -30px;
     align-items: center;
 }
 
@@ -42,36 +53,42 @@
     padding: 0 25px;
     padding-bottom: 70px;
     border-radius: 15px;
-    box-shadow: 2px 2px 5px black;
+    box-shadow: 2px 0 5px black, -2px 0 5px black;
 }
 
 .notesContainer {
     background-color: var(--color-muted-gray-green);
     padding: 20px 50px;
     font-size: 1.5rem;
-    box-shadow: 2px 2px 5px black;
+    box-shadow: 2px 0 5px black, -2px 0 5px black;
     border-radius: 15px;
 }
 
-.backBtn {
+.backBtn,
+.addNewNotes {
     text-decoration: none;
     position: absolute;
-    bottom: 10px;
-    right: 10px;
+
     background-color: var(--color-primary-accent-green);
     color: var(--color-bg-light-green);
     padding: 10px 15px;
     font-weight: bold;
     font-size: 1.2rem;
     border-radius: 10px;
-    box-shadow: 2px 2px 3px black;
+    box-shadow: -2px 0 3px black, 2px 0 3px black;
 }
-.backBtn:hover {
+.backBtn {
+    bottom: 15px;
+    right: 20px;
+}
+.addNewNotes {
+    bottom: 15px;
+    right: 200px;
+}
+.backBtn:hover,
+.addNewNotes:hover {
     background-color: hsl(142, 71%, 30%);
     transition: background-color 0.3s ease;
-    font-size: 1.4rem;
-    transition: font-size 0.3s ease;
-}
-.backBtn:active {
-    color: blue;
+    transform: scale(1.15);
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }

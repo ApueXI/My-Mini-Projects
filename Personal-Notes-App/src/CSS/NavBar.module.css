@@ -1,0 +1,41 @@
+/* 🌱 Fresh & Natural Green Palette */
+:root {
+    --color-bg-light-green: #f0fdf4; /* Light minty background */
+    --color-primary-accent-green: #22c55e; /* Vibrant green */
+    --color-secondary-accent-green: #4ade80; /* Softer lime green */
+    --color-neutral-dark-text-green: #14532d; /* Deep forest text */
+    --color-muted-gray-green: #dcfce7; /* Muted pale green-gray */
+}
+.navBar {
+    background-color: var(--color-secondary-accent-green);
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    height: 12vh;
+    position: relative;
+}
+.navBarlink {
+    font-size: 2rem;
+    margin-right: 30px;
+    background-color: var(--color-neutral-dark-text-green);
+    color: var(--color-bg-light-green);
+    padding: 10px 15px;
+    border-radius: 15px;
+    text-decoration: none;
+    box-shadow: 2px 0 5px black, -2px 0 5px black;
+}
+.navBarlink:hover {
+    background-color: hsl(144, 61%, 40%);
+    transform: scale(1.15);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+.title {
+    background-color: var(--color-neutral-dark-text-green);
+    font-size: 1.7rem;
+    position: absolute;
+    left: 3.5rem;
+    border-radius: 10px;
+    color: var(--color-bg-light-green);
+    padding: 15px 25px;
+    box-shadow: -2px 0 5px black, 2px 0 5px black;
+}

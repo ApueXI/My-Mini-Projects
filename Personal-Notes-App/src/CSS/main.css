@@ -1,4 +1,14 @@
+/* 🌱 Fresh & Natural Green Palette */
+:root {
+    --color-bg-light-green: #f0fdf4; /* Light minty background */
+    --color-primary-accent-green: #22c55e; /* Vibrant green */
+    --color-secondary-accent-green: #4ade80; /* Softer lime green */
+    --color-neutral-dark-text-green: #14532d; /* Deep forest text */
+    --color-muted-gray-green: #dcfce7; /* Muted pale green-gray */
+}
+
+
 body {
-    background-color: hsl(0, 0%, 80%);
+    background-color: #212121;
     margin: 0;
 }
