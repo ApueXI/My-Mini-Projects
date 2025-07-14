@@ -8,7 +8,7 @@
 }
 
 .body {
-    height: 100vh;
+    height: 80vh;
 }
 .body,
 .navBarBG,
@@ -67,16 +67,12 @@
     margin: 0px 10px;
     border-radius: 50px;
     text-decoration: none;
-    cursor: pointer;
     font-weight: bold;
     font-size: 1.2rem;
 }
 .navBarlink:hover {
     background-color: hsl(142, 85%, 72%);
     transition: background-color 0.35s ease;
-    font-size: 1.5rem;
-    transition: font-size .3s ease;
-}
-.navBarlink:active {
-    color: blue;
+    transform: scale(1.15);
+    transition: transform 0.3s ease;
 }

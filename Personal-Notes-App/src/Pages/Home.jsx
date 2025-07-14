@@ -12,9 +12,6 @@ export default function Home() {
                         <Link to="/notes" className={styles.navBarlink}>
                             Notes List
                         </Link>
-                        <Link to="/add" className={styles.navBarlink}>
-                            Add Notes
-                        </Link>
                     </div>
                 </div>
             </div>
