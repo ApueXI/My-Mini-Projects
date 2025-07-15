@@ -50,11 +50,11 @@
 .content {
     width: inherit;
     height: inherit;
-    font-size: 1.3rem;
+    font-weight: bold;
+    font-size: 1.15rem;
 }
 
 .containBtn {
-    height: inherit;
     display: flex;
     align-items: flex-end;
     justify-content: space-evenly;

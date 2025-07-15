@@ -1,0 +1,60 @@
+/* 🌱 Fresh & Natural Green Palette */
+:root {
+    --color-bg-light-green: #f0fdf4; /* Light minty background */
+    --color-primary-accent-green: #22c55e; /* Vibrant green */
+    --color-secondary-accent-green: #4ade80; /* Softer lime green */
+    --color-neutral-dark-text-green: #14532d; /* Deep forest text */
+    --color-muted-gray-green: #dcfce7; /* Muted pale green-gray */
+}
+.container {
+    padding: 30px 50px;
+    padding-top: 10px;
+    background-color: var(--color-neutral-dark-text-green);
+    height: 55vh;
+    width: 30vw;
+    position: relative;
+    border-radius: 15px;
+}
+.noteText {
+    color: var(--color-bg-light-green);
+    margin: 0;
+    font-size: 3.5rem;
+    text-align: center;
+    background-color: hsl(144, 61%, 40%, 0.5);
+    border-radius: 20px;
+    box-shadow: 2px 0 5px black, -2px 0 5px black;
+}
+
+.title {
+    margin-top: 10px;
+    text-shadow: 40px 10px 0 black, -40px -10px 0 black;
+    margin: 30px 0;
+    color: var(--color-bg-light-green);
+}
+
+.content {
+    background-color: var(--color-bg-light-green);
+    border-radius: 15px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    height: 50%;
+    padding: 20px 30px;
+    overflow: auto;
+    text-align: justify;
+}
+.link {
+    color: var(--color-bg-light-green);
+    text-decoration: none;
+    position: absolute;
+    background-color: var(--color-secondary-accent-green);
+    font-size: 1.9rem;
+    padding: 10px 15px;
+    border-radius: 30px;
+    right: 10px;
+    bottom: 10px;
+}
+.link:hover {
+    transform: scale(1.1);
+    background-color: hsl(142, 69%, 38%);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
