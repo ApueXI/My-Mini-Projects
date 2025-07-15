@@ -6,18 +6,33 @@ import React from "react";
 
 export default function NotesList() {
     const [isAddNote, setIsAddNote] = useState(false);
-    const [dataList, setDataList] = useState([]);
+    const [dataList, setDataList] = useState(() => {
+        const storedNotes = localStorage.getItem("notes");
+        return storedNotes ? JSON.parse(storedNotes) : [];
+    });
 
     const handleShowNote = () => setIsAddNote(true);
     const handleHideNote = () => setIsAddNote(false);
 
     const handleDataForm = (formData) => {
         setDataList((prevData) => [...prevData, formData]);
+        setIsAddNote(false);
+    };
+
+    const removeNotes = (noteID) => {
+        setDataList((prevDataList) =>
+            prevDataList.filter((notes) => notes.idData !== noteID)
+        );
     };
 
     useEffect(() => {
-        setIsAddNote(false);
-        console.log(dataList);
+        const storedNotes = localStorage.getItem("notes");
+        if (storedNotes) setDataList(JSON.parse(storedNotes));
+    }, []);
+
+    useEffect(() => {
+        localStorage.setItem("notes", JSON.stringify(dataList));
+        console.log(`Save Data:${dataList}`);
     }, [dataList]);
 
     return (
@@ -30,13 +45,22 @@ export default function NotesList() {
                     <ul className={styles.notesContainer}>
                         {dataList.map((data, index) => {
                             return (
-                                <React.Fragment key={index}>
-                                    <Link to={`notes/${index}`}>
-                                        {`Title: ${data.titleData}`}
-                                        {`Content: ${data.contentData}`}
-                                        {`ID: ${data.idData}`}
-                                        <br />
+                                <React.Fragment key={data.idData}>
+                                    <Link
+                                        to={`/individual/${data.idData}`}
+                                        state={{ data }}
+                                    >
+                                        {`${index + 1}. `}
+                                        {`${data.titleData}`}
                                     </Link>
+                                    <button
+                                        onClick={() => {
+                                            removeNotes(data.idData);
+                                        }}
+                                    >
+                                        X
+                                    </button>
+                                    <br />
                                     <br />
                                 </React.Fragment>
                             );
