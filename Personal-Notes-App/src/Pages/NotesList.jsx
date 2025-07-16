@@ -1,8 +1,9 @@
-import { Link } from "react-router-dom";
+import { data, Link } from "react-router-dom";
 import styles from "../CSS/NotesList.module.css";
 import AddNotes from "../Components/AddNotes";
 import { useEffect, useState } from "react";
 import React from "react";
+import PageNotFOund from "../Components/PageNotFound";
 
 export default function NotesList() {
     const [isAddNote, setIsAddNote] = useState(false);
@@ -35,6 +36,36 @@ export default function NotesList() {
         console.log(`Save Data:${dataList}`);
     }, [dataList]);
 
+    const hasData = (
+        <ul className={styles.notesContainer}>
+            {dataList.map((data, index) => {
+                return (
+                    <React.Fragment key={data.idData}>
+                        <Link
+                            style={{ textDecoration: "none" }}
+                            to={`/individual/${data.idData}`}
+                            state={{ data }}
+                        >
+                            <h4 style={{ display: "inline" }}>{`${index + 1} ${
+                                data.titleData
+                            }`}</h4>
+                        </Link>
+                        <button
+                            style={{ marginLeft: "10px" }}
+                            onClick={() => {
+                                removeNotes(data.idData);
+                            }}
+                        >
+                            X
+                        </button>
+                        <br />
+                        <br />
+                    </React.Fragment>
+                );
+            })}
+        </ul>
+    );
+
     return (
         <div className={styles.body}>
             <div className={styles.titleBG}>
@@ -42,30 +73,8 @@ export default function NotesList() {
             </div>
             <div className={styles.container}>
                 <div className={styles.notesBG}>
-                    <ul className={styles.notesContainer}>
-                        {dataList.map((data, index) => {
-                            return (
-                                <React.Fragment key={data.idData}>
-                                    <Link
-                                        to={`/individual/${data.idData}`}
-                                        state={{ data }}
-                                    >
-                                        {`${index + 1}. `}
-                                        {`${data.titleData}`}
-                                    </Link>
-                                    <button
-                                        onClick={() => {
-                                            removeNotes(data.idData);
-                                        }}
-                                    >
-                                        X
-                                    </button>
-                                    <br />
-                                    <br />
-                                </React.Fragment>
-                            );
-                        })}
-                    </ul>
+                    {dataList.length ? hasData : <PageNotFOund />}
+
                     <div
                         className={styles.addNewNotes}
                         onClick={handleShowNote}
@@ -77,6 +86,8 @@ export default function NotesList() {
                     </Link>
                 </div>
             </div>
+
+            {/*  */}
             {isAddNote && (
                 <div className={styles.addNotes}>
                     <AddNotes
