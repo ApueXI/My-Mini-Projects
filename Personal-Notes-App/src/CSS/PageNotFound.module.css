@@ -1,0 +1,6 @@
+.title {
+    text-align: center;
+    background-color: var(--color-primary-accent-green);
+    padding: 10px 15px;
+    border-radius: 50px;
+}
