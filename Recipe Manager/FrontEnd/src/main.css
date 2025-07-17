@@ -1,0 +1,32 @@
+@import "tailwindcss";
+
+@theme {
+    /* 💙 Cool & Clean Blue Palette */
+    --color-color-bg-light-blue: #eff6ff; /* Light blue background */
+    --color-color-primary-accent-blue: #3b82f6; /* Vivid blue */
+    --color-color-secondary-accent-blue: #60a5fa; /* Softer sky blue */
+    --color-color-neutral-dark-text-blue: #1e3a8a; /* Deep navy text */
+    --color-color-muted-gray-blue: #dbeafe; /* Muted icy blue-gray */
+    --width-inherit: inherit;
+}
+
+body {
+    margin: 0;
+    background: black;
+}
+
+@layer base {
+    h6 {
+        @apply text-white;
+    }
+}
+
+@layer components {
+    .card {
+        @apply bg-red-500;
+    }
+}
+
+@utility flex-center {
+    @apply flex justify-center items-center;
+}
