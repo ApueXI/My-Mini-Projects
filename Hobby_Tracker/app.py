@@ -60,6 +60,7 @@ def receiveData():
         print("Habit successfully added")
         return jsonify({"status": 'success', "received" : data, "from" : "Python"}), 200
     except Exception as e:
+        db.session.rollback()
         print(f"Habit failed to be added\nError: {e}")
         return jsonify({"status": 'error', "received" : data, "from" : "Python"}), 500
 
