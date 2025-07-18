@@ -1,15 +1,23 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from os import path
+from flask_cors import CORS
+import logging
 
 db = SQLAlchemy()
-db_name = "dataRecipe.db"
+DB_NAME = "dataRecipe.db"
 
 def run_app():
     app = Flask(__name__)
-    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{db_name}'
+    app.config['SQLALCHEMY_DATABASE_URI'] = f'sqlite:///{DB_NAME}'
     app.config['SECRET_KEY'] = '48084b9b12ba702758cd10336ae388cf'
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    CORS(app)
+
+    from .recipeManage import recipe_manage
+
+    app.register_blueprint(recipe_manage, url_prefix="/api")
 
     db.init_app(app)
 
@@ -23,7 +31,7 @@ def run_app():
 
 
 def create_database(app):
-    if not path.exists("Backend/" + db_name):
+    if not path.exists("Backend/" + DB_NAME):
         with app.app_context():
             db.create_all()
-            print("Database Created")
+            logging.info("Database Created")

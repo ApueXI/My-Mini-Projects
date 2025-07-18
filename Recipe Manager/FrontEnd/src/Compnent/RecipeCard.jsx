@@ -14,7 +14,7 @@ export default function RecipeCard({
             </h1>
             <div
                 className="font-bold bg-white w-[95%] grid grid-cols-1 gap-y-[10px] text-wrap whitespace-normal wrap-break-word 
-                         text-color-neutral-dark-text-blue p-[10px] mt-[10px] rounded-lg"
+                         text-black p-[10px] mt-[10px] rounded-lg"
             >
                 <p>Placeholder Image </p>
                 <p>{title}</p>
