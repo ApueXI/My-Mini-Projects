@@ -12,6 +12,7 @@
 
 body {
     margin: 0;
+    padding: 0;
     background: black;
 }
 
@@ -22,8 +23,23 @@ body {
 }
 
 @layer components {
-    .card {
-        @apply bg-red-500;
+    .dropdownContainer button {
+        @apply block px-[10px] py-[5px] ring rounded-lg bg-color-secondary-accent-blue cursor-pointer hover:bg-[hsl(213,94%,58%)] transition duration-300 ease-in-out;
+    }
+    .formContent {
+        @apply sm:flex justify-between sm:my-4 my-2;
+    }
+    .formContent label {
+        @apply font-bold cursor-pointer;
+    }
+    .formContent input {
+        @apply cursor-pointer rounded-md;
+    }
+    .formContent textarea{
+        @apply font-bold sm:h-22
+    }
+    .transi {
+        @apply transform duration-300 ease-in-out;
     }
 }
 
