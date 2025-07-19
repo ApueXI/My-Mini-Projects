@@ -1,11 +1,13 @@
 import "./main.css";
 import Home from "./Pages/Home";
+import ViewRecipe from "./Pages/ViewRecipe";
 import { Routes, Route } from "react-router-dom";
 
 export default function App() {
     return (
         <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/view/:id" element={<ViewRecipe />} />
         </Routes>
     );
 }

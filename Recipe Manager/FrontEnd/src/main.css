@@ -36,7 +36,7 @@ body {
         @apply cursor-pointer rounded-md;
     }
     .formContent textarea{
-        @apply font-bold sm:h-22
+        @apply font-bold sm:h-22 h-16
     }
     .transi {
         @apply transform duration-300 ease-in-out;

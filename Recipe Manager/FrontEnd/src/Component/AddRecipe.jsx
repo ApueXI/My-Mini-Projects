@@ -4,7 +4,7 @@ export default function AddRecipe({ hide, onSubmit }) {
     const titleData = useRef(null);
     const ingredientsData = useRef(null);
     const instructionsData = useRef(null);
-    // const imageFileData = useRef(null);
+    const imageFileData = useRef(null);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -12,19 +12,19 @@ export default function AddRecipe({ hide, onSubmit }) {
         const title = titleData.current.value;
         const ingredients = ingredientsData.current.value;
         const instructions = instructionsData.current.value;
-        // const image_file = imageFileData.current.files?.[0];
+        const image_file = imageFileData.current.files?.[0];
 
-        onSubmit({ title, ingredients, instructions });
+        onSubmit({ title, ingredients, instructions, image_file });
 
         titleData.current.value = "";
         ingredientsData.current.value = "";
         instructionsData.current.value = "";
-        // if (imageFileData.current) imageFileData.current.value = null;
+        if (imageFileData.current) imageFileData.current.value = null;
     };
 
     return (
         <div
-            className="fixed z-10 h-[clamp(250px,50vh,500px)] w-[clamp(100px,80vw,500px)] top-[175px] flex justify-center items-center flex-col 
+            className="fixed z-10 h-[clamp(250px,55vh,500px)] w-[clamp(100px,80vw,500px)] top-[175px] flex justify-center items-center flex-col 
                         rounded-lg bg-[hsl(0,0%,90%)] "
         >
             <div className="absolute flex justify-between w-[90%] items-center top-2 px-2">
@@ -49,29 +49,33 @@ export default function AddRecipe({ hide, onSubmit }) {
                     <input
                         type="text"
                         id="title"
+                        name="title"
                         ref={titleData}
                         required
                         className="bg-white w-full sm:ml-5 font-bold"
                     />
                 </div>
 
-                {/* <div className="formContent">
-                    <label htmlFor="imgURL" className="w-[300px]">
-                        Upload Image:
+                <div className="formContent">
+                    <label htmlFor="imgURL" className="w-[300px] line-clamp-2">
+                        Upload Image (.png, .jpg )
                     </label>
                     <input
                         type="file"
                         id="imgURL"
+                        name="imgURL"
                         ref={imageFileData}
+                        accept="image/png, image/jpeg"
                         required
                         className="w-full bg-white px-2"
                     />
-                </div> */}
+                </div>
 
                 <div className="formContent">
                     <label htmlFor="ingredients">Ingredients:</label>
                     <textarea
                         id="ingredients"
+                        name="ingredients"
                         ref={ingredientsData}
                         required
                         className="bg-white w-full sm:ml-4 rounded-sm"
@@ -82,6 +86,7 @@ export default function AddRecipe({ hide, onSubmit }) {
                     <label htmlFor="instructions">Instructions</label>
                     <textarea
                         id="instructions"
+                        name="instructions"
                         ref={instructionsData}
                         required
                         className="bg-white w-full sm:ml-4 rounded-sm"

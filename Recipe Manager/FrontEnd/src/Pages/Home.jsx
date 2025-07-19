@@ -1,25 +1,46 @@
 import "../main.css";
-import { useState } from "react";
-import RecipeCard from "../Compnent/RecipeCard";
-import AddRecipe from "../Compnent/AddRecipe";
-import { sendRecipe } from "../API/recipe";
+import { useState, useEffect } from "react";
+import RecipeCard from "../Component/RecipeCard";
+import AddRecipe from "../Component/AddRecipe";
+import { sendRecipe, getRecipe } from "../API/recipe";
 
 export default function Home() {
     const [dropDown, setDropDown] = useState(false);
     const [isAddRecipe, setIsAddRecipe] = useState(false);
+    const [recipes, setRecipe] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const isDropDown = () => setDropDown(!dropDown);
 
     const addRecipeShow = () => setIsAddRecipe(true);
     const addRecipeHide = () => setIsAddRecipe(false);
 
+    useEffect(() => {
+        const loadRecipe = async () => {
+            try {
+                const recipeData = await getRecipe();
+                setRecipe(recipeData);
+                console.info(`Data: ${recipeData ? "success" : "error"}`);
+            } catch (e) {
+                console.error(`No recipe from data \nError: ${e}`);
+            } finally {
+                console.info(`This process is complete`);
+                setLoading(false);
+            }
+        };
+        loadRecipe();
+    }, [recipes]);
+
     const dropDownBtn = () => {
         alert(`Button has been pressed`);
     };
 
-    const submitData = (formData) => {
-        sendRecipe(formData);
+    const submitData = async (formData) => {
+        await sendRecipe(formData);
         setIsAddRecipe(false);
+
+        const updatedRecipe = await getRecipe();
+        setRecipe(updatedRecipe);
     };
 
     return (
@@ -44,7 +65,6 @@ export default function Home() {
                     ></AddRecipe>
                 </div>
             )}
-
             <div
                 className="text-black text-[1.4rem] font-bold bg-color-secondary-accent-blue py-2  my-[50px] sm:flex sm:items-center sm:gap-10 sm:pl-[50px]
                             grid place-items-center"
@@ -72,18 +92,20 @@ export default function Home() {
                 </div>
             </div>
             <div className="pt-[20px] mb-[100px] h-[inherit] flex flex-wrap gap-y-10 gap-x-1 pb-[30px] bg-color-primary-accent-blue text-white justify-evenly">
-                {/* Card */}
-                <RecipeCard title="Adobo" shortDesc="Masarap"></RecipeCard>
-                <RecipeCard title="Tinola" shortDesc="Sabaw"></RecipeCard>
-                <RecipeCard title="Sinigang" shortDesc="Maasim"></RecipeCard>
-                <RecipeCard title="Pares" shortDesc="Pares Mami"></RecipeCard>
-                <RecipeCard title="Pares" shortDesc="Pares Mami"></RecipeCard>
-                <RecipeCard title="Pares" shortDesc="Pares Mami"></RecipeCard>
-                <RecipeCard title="Pares" shortDesc="Pares Mami"></RecipeCard>
-                <RecipeCard title="Pares" shortDesc="Pares Mami"></RecipeCard>
-                <RecipeCard title="Pares" shortDesc="Pares Mami"></RecipeCard>
-                <RecipeCard title="Pares" shortDesc="Pares Mami"></RecipeCard>
-                <RecipeCard title="Pares" shortDesc="Pares Mami"></RecipeCard>
+                {loading ? (
+                    <div className="bg-black px-5 py-3 rounded-full animate-pulse">
+                        Processing…
+                    </div>
+                ) : (
+                    recipes.map((recipe) => (
+                        <RecipeCard recipe={recipe} key={recipe.id} />
+                    ))
+                )}
+                {recipes.length == 0 && !loading && (
+                    <div className="bg-black px-5 py-3 rounded-full animate-pulse">
+                        No recipe, Please add a recipe
+                    </div>
+                )}
             </div>
         </div>
     );
