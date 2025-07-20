@@ -1,5 +1,7 @@
 import { Link, useLocation, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { deleteRecipe } from "../API/recipe";
+import { useNavigate } from "react-router-dom";
 
 export default function ViewRecipe() {
     const location = useLocation();
@@ -8,54 +10,71 @@ export default function ViewRecipe() {
     const recipe = location.state?.recipe;
     const [loading, setLoading] = useState(!recipe);
 
+    const navigate = useNavigate();
+
     useEffect(() => {
         if (!recipe) setLoading(true);
         console.log(recipe);
         console.log(loading);
     }, [id]);
 
+    const handleDeleteData = async (id) => {
+        await deleteRecipe(id);
+        navigate("/");
+    };
+
     return (
         <div>
-            <div
-                className="flex sm:justify-start justify-center bg-color-neutral-dark-text-blue 
-                            px-[30px] py-[30px]"
-            >
-                <h1
-                    className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold bg-color-primary-accent-blue
-                               px-[15px] py-[15px] rounded-xl shadow-[3px_0_5px_black,-3px_0_5px_black]"
-                >
+            <div className="flex sm:justify-start justify-center bg-color-neutral-dark-text-blue px-[30px] py-[30px]">
+                <h1 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold bg-color-primary-accent-blue px-[15px] py-[15px] rounded-xl shadow-[3px_0_5px_black,-3px_0_5px_black]">
                     Recipe for {recipe.title}
                 </h1>
             </div>
-            <div className="mt-[10vh] flex justify-center">
-                <div className="bg-color-secondary-accent-blue relative w-[clamp(300px,30vw,600px)] h-[clamp(150px,60vh,600px)] rounded-e-lg">
+            <div className="sm:mt-24 mt-14 flex justify-center">
+                <div className="bg-color-secondary-accent-blue relative mx-2 w-[clamp(300px,65vw,600px)] sm:h-[clamp(200px,70vh,600px)] h-[71rem] rounded-lg sm:w-[clamp(40rem,80vw,65rem)]">
                     <Link
-                        className="absolute top-3 right-3 bg-color-primary-accent-blue px-2 py-1 rounded-xl font-bold
-                                     hover:bg-[hsl(217,91%,50%)] hover:scale-120 transi"
+                        className="absolute top-3 right-3 bg-color-primary-accent-blue px-2 py-1 rounded-xl font-boldhover:bg-[hsl(217,91%,50%)] hover:scale-120 transi"
                         to="/"
                     >
                         Go Back
                     </Link>
-                    <h1
-                        className="absolute bottom-3 left-3 bg-color-primary-accent-blue px-2 py-1 rounded-xl font-bold
-                                     hover:bg-[hsl(217,91%,50%)] hover:scale-120 transi"
-                    >
-                        ID: {recipe.id}
-                    </h1>
-                    <h1
-                        className="absolute bottom-3 right-3 bg-color-primary-accent-blue px-2 py-1 rounded-xl font-bold
-                                     hover:bg-[hsl(217,91%,50%)] hover:scale-120 transi"
-                    >
-                        ID URL: {id}
-                    </h1>
 
-                    <h1 className="bg-white mt-16 mx-15 ">Title: {recipe.title ? "True" : "False"}</h1>
-                    <h1>
-                        ingredients: {recipe.ingredients ? "True" : "False"}
-                    </h1>
-                    <h1>
-                        Instructions{recipe.instructions ? "True" : "False"}
-                    </h1>
+                    <div className="bg-color-muted-gray-blue h-11/12 w-11/12 rounded-lg relative mx-auto mt-15 sm:grid sm:grid-cols-2 sm:h-10/12">
+                        <div className=" flex justify-center items-center sm:p-0 py-4 mx-1">
+                            <img
+                                src={`/${recipe.image_file}`}
+                                alt={recipe.title}
+                                className="size-42 sm:size-110"
+                            />
+                        </div>
+                        <div className="sm:grid grid-cols-2 viewParagraph sm:gap-3 sm:mt-7 mx-2 sm:space-y-0 space-y-5">
+                            <div className="bg-color-bg-light-blue">
+                                <p className="title">Ingredients: </p>
+                                <p className="mx-2 whitespace-pre-wrap">
+                                    {recipe.ingredients}
+                                </p>
+                            </div>
+                            <div className="bg-color-bg-light-blue">
+                                <p className="title">Instructions: </p>
+                                <p className="mx-2 whitespace-pre-wrap">
+                                    {recipe.instructions}
+                                </p>
+                            </div>
+                        </div>
+                        <div className="absolute bottom-3 w-full flex items-center justify-evenly font-bold viewBtn sm:justify-end sm:pr-5 sm:gap-5">
+                            <button className="bg-color-primary-accent-blue hover:scale-120 hover:bg-[hsl(217,91%,50%)] transi">
+                                Edit
+                            </button>
+                            <button
+                                className="bg-[hsl(213,94%,78%)] hover:scale-120 hover:bg-[hsl(213,94%,48%)] transi"
+                                onClick={() => {
+                                    handleDeleteData(recipe.id);
+                                }}
+                            >
+                                Delete
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

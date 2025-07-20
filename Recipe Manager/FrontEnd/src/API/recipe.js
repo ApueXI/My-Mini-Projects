@@ -26,9 +26,32 @@ export const getRecipe = async () => {
     console.log("------------------------------------");
     console.log({ response, data });
     console.log(
-        `Send to the backend: ${data ? "success" : "success"} \nStatus: ${response.status} \nFrom getRecipe`
+        `Send to the backend: ${data ? "success" : "error"} \nStatus: ${
+            response.status
+        } \nFrom getRecipe`
     );
     console.log("------------------------------------");
 
-    return data
+    return data;
+};
+
+export const deleteRecipe = async (id) => {
+    try {
+        const response = await fetch(`/api/recipe/delete/${id}`, {
+            method: "DELETE",
+        });
+
+        const data = await response.json();
+
+        console.log("------------------------------------");
+        console.log({ response, data });
+        console.log(
+            `Send to the backend: ${data ? "success" : "error"} \nStatus: ${
+                response.status
+            } \nFrom deleteRecipe`
+        );
+        console.log("------------------------------------");
+    } catch (e) {
+        console.error(`Error occured: ${e}`);
+    }
 };

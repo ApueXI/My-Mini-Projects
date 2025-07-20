@@ -32,7 +32,8 @@ def manage_recipe():
         db.session.add(recipe)
         db.session.commit()
         logging.info("data was succesfully added to the database")
-        return jsonify({"status": "success", "ok": True, "From": "Python"}), 200
+
+        return jsonify({"status": "success", "ok": True, "received": recipe.display_data(), "From": "Python"}), 200
     
     except Exception as e:
         db.session.rollback()
@@ -57,6 +58,34 @@ def sendRecipe():
         })
 
     return jsonify(data)
+
+@recipe_manage.route("/recipe/delete/<int:id>", methods=["DELETE"])
+def delete_recipe(id):
+
+    recipe = Recipe.query.get_or_404(id)
+
+    try:
+        db.session.delete(recipe)
+        db.session.commit()
+        logging.info("Recipe has been deleted")
+        return jsonify({ "status": "success", "ok": True,"ID": id, "from" : "Python" }), 200
+    
+    except Exception as e:
+        db.session.rollback()
+        logging.info(f"Error occured: {e}")
+        return jsonify({ "status": "error", "ok": False,"message": str(e), "from" : "Python" }), 500
+    
+@recipe_manage.route("/recipe/update/<int:id>", methods=["PUT"])
+def update_recipe(id):
+    
+    recipe = Recipe.query.get_or_404(id)
+
+    try:
+        pass
+    
+    except Exception as e:
+        db.session.rollback()
+        logging.info(f"Error occured: {e}")
 
 
 def save_picture(form_picture):

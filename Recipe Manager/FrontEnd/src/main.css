@@ -26,20 +26,37 @@ body {
     .dropdownContainer button {
         @apply block px-[10px] py-[5px] ring rounded-lg bg-color-secondary-accent-blue cursor-pointer hover:bg-[hsl(213,94%,58%)] transition duration-300 ease-in-out;
     }
+
     .formContent {
         @apply sm:flex justify-between sm:my-4 my-2;
     }
+
     .formContent label {
         @apply font-bold cursor-pointer;
     }
+
     .formContent input {
         @apply cursor-pointer rounded-md;
     }
-    .formContent textarea{
-        @apply font-bold sm:h-22 h-16
+
+    .formContent textarea {
+        @apply font-bold sm:h-22 h-16;
     }
+
     .transi {
         @apply transform duration-300 ease-in-out;
+    }
+
+    .viewBtn button {
+        @apply px-2 py-1 rounded-md cursor-pointer;
+    }
+
+    .viewParagraph div {
+        @apply overflow-auto sm:h-100 h-96 ring;
+    }
+
+    .title {
+        @apply font-bold text-2xl mb-5 mt-3 text-center;
     }
 }
 
