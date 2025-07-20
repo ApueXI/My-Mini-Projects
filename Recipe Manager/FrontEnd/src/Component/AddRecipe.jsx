@@ -23,25 +23,20 @@ export default function AddRecipe({ hide, onSubmit }) {
     };
 
     return (
-        <div
-            className="fixed z-10 h-[clamp(250px,55vh,500px)] w-[clamp(100px,80vw,500px)] top-[175px] flex justify-center items-center flex-col 
-                        rounded-lg bg-[hsl(0,0%,90%)] "
-        >
+        <div className="fixed z-10 h-[clamp(250px,55vh,500px)] w-[clamp(100px,80vw,500px)] top-[175px] flex justify-center items-center flex-col rounded-lg bg-[hsl(0,0%,90%)] ">
             <div className="absolute flex justify-between w-[90%] items-center top-2 px-2">
                 <h1 className="px-2 inline-block py-1 text-2xl rounded-md bg-color-neutral-dark-text-blue text-color-bg-light-blue">
                     Recipe Form
                 </h1>
                 <button
                     onClick={hide}
-                    className="cursor-pointer bg-color-primary-accent-blue text-color-bg-light-blue px-2 py-1 rounded-lg
-                             hover:bg-[hsl(217,91%,50%)] hover:scale-110 active:bg-[hsl(217,91%,50%)] active:scale-115 transi"
+                    className="cursor-pointer bg-color-primary-accent-blue text-color-bg-light-blue px-2 py-1 rounded-lg hover:bg-[hsl(217,91%,50%)] hover:scale-110 active:bg-[hsl(217,91%,50%)] active:scale-115 transi"
                 >
                     Back
                 </button>
             </div>
             <form
-                className="relative bg-color-secondary-accent-blue shadow-[2px_0_5px_black,-2px_0_5px_black]
-                             w-[90%] h-[80%] mt-10 sm:py-7 px-10 rounded-xl"
+                className="relative bg-color-secondary-accent-blue shadow-[2px_0_5px_black,-2px_0_5px_black] w-[90%] h-[80%] mt-10 sm:py-7 px-10 rounded-xl"
                 onSubmit={handleSubmit}
             >
                 <div className="formContent">
@@ -94,8 +89,7 @@ export default function AddRecipe({ hide, onSubmit }) {
                 </div>
                 <button
                     type="submit"
-                    className="absolute bottom-3 right-5 font-bold bg-color-primary-accent-blue text-color-bg-light-blue px-2 py-1 rounded-lg 
-                             hover:bg-[hsl(217,91%,50%)] hover:scale-110 transi cursor-pointer"
+                    className="absolute bottom-3 right-5 font-bold bg-color-primary-accent-blue text-color-bg-light-blue px-2 py-1 rounded-lg hover:bg-[hsl(217,91%,50%)] hover:scale-110 transi cursor-pointer"
                 >
                     Save Recipe
                 </button>

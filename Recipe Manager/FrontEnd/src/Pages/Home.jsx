@@ -28,8 +28,9 @@ export default function Home() {
                 setLoading(false);
             }
         };
+
         loadRecipe();
-    }, [recipes]);
+    }, []);
 
     const dropDownBtn = () => {
         alert(`Button has been pressed`);
@@ -51,8 +52,7 @@ export default function Home() {
                 </h1>
                 <button
                     onClick={addRecipeShow}
-                    className="mr-[clamp(20px, 10vw, 40px)] text-[clamp(.9rem,4vw,1.6rem)] font-bold px-[10px] my-[10px] rounded-lg bg-color-secondary-accent-blue 
-                                hover:bg-[hsl(213,94%,48%)] hover:scale-[1.1] transi cursor-pointer"
+                    className="mr-[clamp(20px, 10vw, 40px)] text-[clamp(.9rem,4vw,1.6rem)] font-bold px-[10px] my-[10px] rounded-lg bg-color-secondary-accent-blue hover:bg-[hsl(213,94%,48%)] hover:scale-[1.1] transi cursor-pointer"
                 >
                     Add Recipe
                 </button>
@@ -65,10 +65,7 @@ export default function Home() {
                     ></AddRecipe>
                 </div>
             )}
-            <div
-                className="text-black text-[1.4rem] font-bold bg-color-secondary-accent-blue py-2  my-[50px] sm:flex sm:items-center sm:gap-10 sm:pl-[50px]
-                            grid place-items-center"
-            >
+            <div className="text-black text-[1.4rem] font-bold bg-color-secondary-accent-blue py-2  my-[50px] sm:flex sm:items-center sm:gap-10 sm:pl-[50px] grid place-items-center">
                 <input
                     type="text"
                     className="ring-4 focus:ring-white m-3 pl-5 w-[clamp(250px,15vw,500px)] rounded-4xl bg-[hsl(213,94%,63%)] "
@@ -77,8 +74,7 @@ export default function Home() {
                 <div className="relative w-[125px] flex justify-center items-center">
                     <button
                         onClick={isDropDown}
-                        className="cursor-pointer ring-2 rounded-full px-[10px] py-[5px] bg-color-primary-accent-blue 
-                                 hover:bg-[hsl(217,91%,50%)] transi"
+                        className="cursor-pointer ring-2 rounded-full px-[10px] py-[5px] bg-color-primary-accent-blue hover:bg-[hsl(217,91%,50%)] transi"
                     >
                         Filter {dropDown ? "▲" : "▼"}
                     </button>
