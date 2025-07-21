@@ -9,6 +9,7 @@ export default function Home() {
     const [isAddRecipe, setIsAddRecipe] = useState(false);
     const [recipes, setRecipe] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [search, setSeach] = useState("");
 
     const isDropDown = () => setDropDown(!dropDown);
 
@@ -31,6 +32,22 @@ export default function Home() {
 
         loadRecipe();
     }, []);
+
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        if (!search) return;
+        if (loading) return;
+
+        setLoading(true)
+        try {
+            
+        } catch (e) {
+            console.error(`Error occured: ${e}`);
+            
+        }finally{
+            setLoading(false)
+        }
+    };
 
     const dropDownBtn = () => {
         alert(`Button has been pressed`);
