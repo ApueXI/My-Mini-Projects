@@ -1,20 +1,17 @@
 import "../main.css";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import RecipeCard from "../Component/RecipeCard";
 import AddRecipe from "../Component/AddRecipe";
-import { sendRecipe, getRecipe } from "../API/recipe";
+import { sendRecipe, getRecipe, searchRecipe } from "../API/recipe";
 
 export default function Home() {
     const [dropDown, setDropDown] = useState(false);
     const [isAddRecipe, setIsAddRecipe] = useState(false);
     const [recipes, setRecipe] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [search, setSeach] = useState("");
-
-    const isDropDown = () => setDropDown(!dropDown);
-
-    const addRecipeShow = () => setIsAddRecipe(true);
-    const addRecipeHide = () => setIsAddRecipe(false);
+    const [search, setSearch] = useState("");
+    const [query, setQeury] = useState("");
+    const [searchedRecipes, setSearchedRecipes] = useState([]);
 
     useEffect(() => {
         const loadRecipe = async () => {
@@ -33,21 +30,28 @@ export default function Home() {
         loadRecipe();
     }, []);
 
-    const handleSearch = async (e) => {
-        e.preventDefault();
-        if (!search) return;
-        if (loading) return;
+    useEffect(() => {
+        const handler = setTimeout(() => setSearch(query), 1000);
 
-        setLoading(true)
-        try {
-            
-        } catch (e) {
-            console.error(`Error occured: ${e}`);
-            
-        }finally{
-            setLoading(false)
-        }
-    };
+        return () => clearTimeout(handler);
+    }, [query]);
+
+    useEffect(() => {
+        const loadSeach = async () => {
+            try {
+                const searchData = await searchRecipe(search);
+                setSearchedRecipes(searchData);
+                console.info(`Data: ${searchData ? "success" : "error"}`);
+            } catch (e) {
+                console.error(`Error occured: ${e}`);
+            }
+        };
+        loadSeach();
+    }, [search]);
+
+    const isDropDown = () => setDropDown(!dropDown);
+    const addRecipeShow = () => setIsAddRecipe(true);
+    const addRecipeHide = () => setIsAddRecipe(false);
 
     const dropDownBtn = () => {
         alert(`Button has been pressed`);
@@ -84,9 +88,11 @@ export default function Home() {
             )}
             <div className="text-black text-[1.4rem] font-bold bg-color-secondary-accent-blue py-2  my-[50px] sm:flex sm:items-center sm:gap-10 sm:pl-[50px] grid place-items-center">
                 <input
-                    type="text"
+                    type="search"
                     className="ring-4 focus:ring-white m-3 pl-5 w-[clamp(250px,15vw,500px)] rounded-4xl bg-[hsl(213,94%,63%)] "
                     placeholder="Seach for..."
+                    onChange={(e) => setQeury(e.target.value)}
+                    value={query}
                 />
                 <div className="relative w-[125px] flex justify-center items-center">
                     <button
@@ -114,6 +120,7 @@ export default function Home() {
                         <RecipeCard recipe={recipe} key={recipe.id} />
                     ))
                 )}
+
                 {recipes.length == 0 && !loading && (
                     <div className="bg-black px-5 py-3 rounded-full animate-pulse">
                         No recipe, Please add a recipe

@@ -1,14 +1,13 @@
 from flask import Blueprint, request, jsonify
 from App import db
 from .model import Recipe
-from App.model import Recipe
 from PIL import Image
 import logging, os, secrets
 
 logger = logging.getLogger(__name__)
 
 handler = logging.FileHandler("API.log")
-fomatter = logging.Formatter("%(name)s - %(asctime)s - %(funcName)s - %(lineno)d -  %(levelname)s - %(message)s")
+fomatter = logging.Formatter("%(name)s - %(asctime)s - %(funcName)s - %(lineno)d -  %(levelname)s - %(message)s ")
 handler.setFormatter(fomatter)
 logger.addHandler(handler)
 
@@ -40,7 +39,7 @@ def manage_recipe():
         db.session.commit()
         logger.info("data was succesfully added to the database")
 
-        return jsonify({"status": "success", "ok": True, "received": recipe.display_data(), "From": "Python"}), 200
+        return jsonify({"status": "success", "ok": True, "received": recipe.display_data(), "From": "Python"}), 201
     
     except Exception as e:
         db.session.rollback()
@@ -75,7 +74,7 @@ def delete_recipe(id):
         db.session.delete(recipe)
         db.session.commit()
         logger.info("Recipe has been deleted")
-        return jsonify({ "status": "success", "ok": True, "ID": id, "from" : "Python" }), 200
+        return jsonify({ "status": "success", "ok": True, "ID": id, "from" : "Python" }), 204
     
     except Exception as e:
         db.session.rollback()
@@ -119,22 +118,32 @@ def update_recipe(id):
 @recipe_manage.route("/recipe/search", methods=["GET"])
 def search_recipe():
 
-    query = request.args.get("query", "")
+    query = request.args.get("query", "").strip()
 
     if not query:
-        logger.error("There is no query")
-        return jsonify({"status" : "error", "ok" : False, "result" : [], "from" : "Python"}), 404
-
+        logger.info("There is no query")
+        return jsonify({"status" : "error", "ok" : False, "result" : [], "message" : "Querry not found" , "from" : "Python"}), 404
 
     searches = Recipe.query.filter(Recipe.title.ilike(f"%{query}%")
                                     ).order_by(Recipe.id.asc()).limit(100).all()
-    
     if not searches:
-        logger.info("There is searcher")
-        searches = Recipe.query.all()
+        logger.info("No search received")
+        searches = Recipe.query.limit(50).all()
+    
+    data = []
+        
+    for recipe in searches:
+        data.append({
+            "id" : recipe.id,
+            "title" : recipe.title,
+            "ingredients" : recipe.ingredients,
+            "instructions" : recipe.instructions,
+            "image_file" : recipe.image_file,
+        })
 
     logger.info("search successful")
-    return jsonify({"status" : "success", "ok" : True, "result" : searches, "from" : "Python"}), 200
+    return jsonify({"status" : "success", "ok" : True, "from" : "Python",
+                    "result" : data}), 200
 
 
 def save_picture(form_picture):
