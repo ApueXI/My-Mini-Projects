@@ -106,8 +106,15 @@ export const searchRecipe = async (query) => {
         );
         console.log("------------------------------------");
 
-        return data.result
+        if (data.ok) {
+            return data.result;
+        } else {
+            console.warn("There is no querry");
+            console.warn(`Message from backend: ${data.message}`);
+            return [];
+        }
     } catch (e) {
         console.error(`Error occured: ${e}`);
+        return [];
     }
 };
