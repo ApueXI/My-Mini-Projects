@@ -1,39 +1,38 @@
-import { useRef, useEffect } from "react";
+import { useRef } from "react";
 
-export default function AddRecipe({
-    hide,
-    onSubmit,
-    mode = "add",
-    recipe = {},
-}) {
+export default function AddRecipe({ hide, onSubmit, mode = "add" }) {
+    // gets the Element of the ref
     const titleData = useRef(null);
     const ingredientsData = useRef(null);
     const instructionsData = useRef(null);
     const imageFileData = useRef(null);
 
-    useEffect(() => {
-        if (mode === "edit" && recipe) {
-            titleData.current.value = recipe.title || "";
-            ingredientsData.current.value = recipe.ingredients || "";
-            instructionsData.current.value = recipe.instructions || "";
-        }
-    }, [mode, recipe]);
-
+    // submits the updated data
+    // partial update, only sends the data when it is filled
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        const title = titleData.current.value;
-        const ingredients = ingredientsData.current.value;
-        const instructions = instructionsData.current.value;
-        const image_file = imageFileData.current.files?.[0] || null;
+        const updatedData = {};
 
-        onSubmit({ title, ingredients, instructions, image_file });
+        if (titleData.current.value.trim() !== "")
+            updatedData.title = titleData.current.value.trim();
+
+        if (ingredientsData.current.value.trim() !== "")
+            updatedData.ingredients = ingredientsData.current.value.trim();
+
+        if (instructionsData.current.value.trim() !== "")
+            updatedData.instructions = instructionsData.current.value.trim();
+
+        if (imageFileData.current.files?.[0])
+            updatedData.image_file = imageFileData.current.files[0];
+
+        onSubmit(updatedData);
 
         if (mode === "add") {
             titleData.current.value = "";
             ingredientsData.current.value = "";
             instructionsData.current.value = "";
-            if (imageFileData.current) imageFileData.current.value = null;
+            if (imageFileData.current) imageFileData.current.value = "";
         }
     };
 

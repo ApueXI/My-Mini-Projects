@@ -1,3 +1,4 @@
+// Sends a fetch to the POST API
 export const sendRecipe = async (dataToSend) => {
     const formData = new FormData();
 
@@ -23,9 +24,10 @@ export const sendRecipe = async (dataToSend) => {
     }
 };
 
-export const getRecipe = async () => {
+// Sends a fetch to the GET API for the FrontEnd to display the data
+export const getRecipe = async (sort = "asc") => {
     try {
-        const response = await fetch("/api/recipe/data");
+        const response = await fetch(`/api/recipe/data?sort=${sort}`);
         const data = await response.json();
 
         console.log("------------------------------------");
@@ -43,6 +45,7 @@ export const getRecipe = async () => {
     }
 };
 
+// Sends a fetch to the GET API then delete it
 export const deleteRecipe = async (id) => {
     try {
         const response = await fetch(`/api/recipe/delete/${id}`, {
@@ -64,6 +67,7 @@ export const deleteRecipe = async (id) => {
     }
 };
 
+// Sends a fetch to the PATCH API to update certain data
 export const updateRecipe = async (data_to_send, id) => {
     const formData = new FormData();
 
@@ -73,7 +77,7 @@ export const updateRecipe = async (data_to_send, id) => {
 
     try {
         const response = await fetch(`/api/recipe/update/${id}`, {
-            method: "PUT",
+            method: "PATCH",
             body: formData,
         });
 
@@ -92,9 +96,12 @@ export const updateRecipe = async (data_to_send, id) => {
     }
 };
 
-export const searchRecipe = async (query) => {
+// Sends a fetch to the GET API so the front end can display the searched data
+export const searchRecipe = async (query, sort = "asc") => {
     try {
-        const response = await fetch(`/api/recipe/search?query=${query}`);
+        const response = await fetch(
+            `/api/recipe/search?query=${query}&sort=${sort}`
+        );
         const data = await response.json();
 
         console.log("------------------------------------");
@@ -107,6 +114,7 @@ export const searchRecipe = async (query) => {
         console.log("------------------------------------");
 
         if (data.ok) {
+            console.log(data.result);
             return data.result;
         } else {
             console.warn("There is no querry");
