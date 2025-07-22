@@ -6,23 +6,30 @@ import AddRecipe from "../Component/AddRecipe";
 import { updateRecipe } from "../API/recipe";
 
 export default function ViewRecipe() {
+    // To manipulate the URL or Link within the parent comonent
     const location = useLocation();
+
+    // The variable within the Link or URL
     const { id } = useParams();
 
+    // Gets the value within the data that is sent in the Link
     const [recipe, setRecipe] = useState(location.state?.recipe);
 
-    const [isUpdateRecipe, setIsUpdateRecipe] = useState(false);
+    // Use to redirect users to another route when used and clicked
+    const navigate = useNavigate();
 
+    // Toggle for showing and hiding the Update Recipe
+    const [isUpdateRecipe, setIsUpdateRecipe] = useState(false);
     const updateRecipeShow = () => setIsUpdateRecipe(true);
     const updateRecipeHide = () => setIsUpdateRecipe(false);
 
-    const navigate = useNavigate();
-
+    // When clicked, it deletes the data then redirects the user to the root which in this case is the Home
     const handleDeleteData = async (id) => {
         await deleteRecipe(id);
         navigate("/");
     };
 
+    // Submits the updated form to the API
     const handleUpdateData = async (formData) => {
         if (!formData.image_file) {
             formData.image_file = recipe.image_file;
@@ -37,6 +44,7 @@ export default function ViewRecipe() {
 
     return (
         <div>
+            {/* Header */}
             <div className="flex sm:justify-start justify-center bg-color-neutral-dark-text-blue px-[30px] py-[30px]">
                 <h1 className="text-[clamp(1.5rem,3.5vw,2.5rem)] font-bold bg-color-primary-accent-blue px-[15px] py-[15px] rounded-xl shadow-[3px_0_5px_black,-3px_0_5px_black]">
                     Recipe for {recipe?.title}
@@ -52,6 +60,8 @@ export default function ViewRecipe() {
                     ></AddRecipe>
                 </div>
             )}
+
+            {/* Card for individual recipe */}
             <div className="sm:mt-24 mt-14 flex justify-center">
                 <div className="bg-color-secondary-accent-blue relative mx-2 w-[clamp(300px,65vw,600px)] sm:h-[clamp(200px,70vh,600px)] h-[71rem] rounded-lg sm:w-[clamp(40rem,80vw,65rem)]">
                     <Link
