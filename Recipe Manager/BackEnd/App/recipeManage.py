@@ -30,7 +30,7 @@ def manage_recipe():
     title = data.get("title")
     ingredients = data.get("ingredients")
     instructions = data.get("instructions")
-    image_file = data.get("image_file")
+    image_file = request.files.get("image_file")
 
     picture_file = save_picture(image_file)
 

@@ -150,7 +150,7 @@ export default function Home() {
                         Filter {dropDown ? "▲" : "▼"}
                     </button>
                     {dropDown && (
-                        <div className="absolute top-12 rounded-lg space-y-0.5 dropdownContainer z-20">
+                        <div className="absolute top-12 rounded-lg space-y-0.5 dropdownContainer z-20 ">
                             <button onClick={ascOrder}>Ascending</button>
                             <button onClick={descOrder}>Descending</button>
                             <button onClick={dropDownBtn}>Option 3</button>

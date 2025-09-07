@@ -29,7 +29,6 @@ export default function AddRecipe({ hide, onSubmit, mode = "add" }) {
         onSubmit(updatedData);
 
         if (mode === "add") {
-            titleData.current.value = "";
             ingredientsData.current.value = "";
             instructionsData.current.value = "";
             if (imageFileData.current) imageFileData.current.value = "";
